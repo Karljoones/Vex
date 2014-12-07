@@ -48,7 +48,11 @@ void draw() {
 /*
 void mouseClicked() {
   if(mainMenu) {  
+<<<<<<< HEAD
     // Start game menu option. NOT DONE YET, NEEDS TO BE ADJUSTED TO FIT THE SCREEN PROPERLY
+=======
+    // Start game menu option. NOT DONE YET, NEEDS TO BE ADJUSTED TO MATCH THE BUTTONS ON THE START MENU
+>>>>>>> 7f8e5e6e05cc7dfb2465039b9322952fb84dd0a6
     if(mouseX > ((width / 2) - 100) && mouseY > ((height / 2) - 90)) {
       if(mouseX < (((width / 2) - 100) + buttonWidth) && mouseY > (((height / 2) - 90))) {
         if(mouseX > ((width / 2) - 100) && mouseY < (((height / 2) - 90)) + buttonHeight) {
