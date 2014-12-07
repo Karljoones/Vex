@@ -2,9 +2,12 @@
 
 class Screens {
  
+ // Main menu screen
  void mainMenu() {
     clear();
     background(0);
+    
+    // Main menu buttons
     stroke(255);
     fill(206,245,247);
     textAlign(CENTER);
@@ -29,5 +32,30 @@ class Screens {
     fill(21,231,246);
     text("Exit", (width/2), (height/2) + 170);
  } 
-  
+ 
+ // Game play screen
+ void game() {
+   clear();
+   
+   // Game border
+   float borderWidth = width - 200;
+   float borderHeight = height - 200;
+
+   // Draw the grid
+   rect(100, 100, borderWidth, borderHeight);
+   noFill();
+   stroke(21, 231, 246, 70);
+   for (float i = 100 ; i < width - 100 ; i += borderWidth / 30) {
+     line(i, 100, i, height - 100);
+   }
+   for (float i = 100; i < height - 100; i += borderHeight / 20) {
+     line(100, i, width - 100, i);
+   }
+   
+   if(debugging) {
+     text(frameRate, 0, 10);
+   }
+   
+   player.displayStats();
+ }
 }

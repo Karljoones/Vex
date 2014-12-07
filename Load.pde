@@ -7,4 +7,9 @@ class Load {
   void loadFonts() {
     mainMenuFont = loadFont("FlynnHollow-48.vlw");
   }
+  
+  void initialiseGame() {
+    playerLives = 3;
+    playerScore = 0;
+  }
 }
