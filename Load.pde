@@ -4,11 +4,18 @@
 
 class Load {
   
+  // Load the fonts into the program
   void loadFonts() {
     mainMenuFont = loadFont("FlynnHollow-48.vlw");
+    playerStatsDisplay = loadFont("ARDESTINE-48.vlw");
+  }
+  
+  void loadImages() {
+    startScreen = loadImage("startscreen.jpg"); 
   }
   
   void initialiseGame() {
+    // Set player stats
     playerLives = 3;
     playerScore = 0;
   }
