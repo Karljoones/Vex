@@ -7,52 +7,42 @@ class Collision {
    if(mousePressed) {
      
      // If start is clicked
-     if(mouseX > ((width / 2) - (buttonWidth / 2)) && mouseY > ((height / 2) - 150)) {
-       if(mouseX < (((width / 2) - (buttonWidth / 2)) + buttonWidth) && mouseY > (((height / 2) - 150))) {
-         if(mouseX > ((width / 2) - (buttonWidth / 2)) && mouseY < (((height / 2) - 150) + buttonHeight)) {
-           if(mouseX < (((width / 2) - (buttonWidth / 2)) + buttonWidth) && mouseY < (((height / 2) - 150) + buttonHeight)) {
-             mainMenu = false;
-             play = true;
-           }
-         }
+     if(mouseX > ((width/2) - (buttonWidth/2)) && mouseX < ((width/2) + (buttonWidth/2))) {
+       if(mouseY > (((height/2) - 150) - (buttonHeight/2)) && mouseY < ((height/2) - 150) + (buttonWidth/2)) {
+          mainMenu = false;
+          play = true;
+          
+          // Initialise the game, setting lives to 3 and the score to zero
+          load.initialiseGame();
+          
+          // i is set to zero so that it can initialise the starting platform of the game
+          i = 0;
        }
      } // End start game
      
-     // if instructions is clicked
-     if(mouseX > ((width / 2) - (buttonWidth / 2)) && mouseY > ((height / 2) - 50)) {
-       if(mouseX < (((width / 2) - (buttonWidth / 2)) + buttonWidth) && mouseY > (((height / 2) - 50))) {
-         if(mouseX > ((width / 2) - (buttonWidth / 2)) && mouseY < (((height / 2) - 50) + buttonHeight)) {
-           if(mouseX < (((width / 2) - (buttonWidth / 2)) + buttonWidth) && mouseY < (((height / 2) - 50) + buttonHeight)) {
-             mainMenu = false;
-             instructionsScreen = true;
-           }
-         }
+     // If instructions is clicked
+     if(mouseX > ((width/2) - (buttonWidth/2)) && mouseX < ((width/2) + (buttonWidth/2))) {
+       if(mouseY > (((height/2) - 50) - (buttonHeight/2)) && mouseY < ((height/2) - 50) + (buttonWidth/2)) {
+          mainMenu = false;
+          instructionsScreen = true;
        }
-     }
+     } // End instructions
      
-     // if options is clicked
-     if(mouseX > ((width / 2) - (buttonWidth / 2)) && mouseY > ((height / 2) - 50)) {
-       if(mouseX < (((width / 2) - (buttonWidth / 2)) + buttonWidth) && mouseY > (((height / 2) - 50))) {
-         if(mouseX > ((width / 2) - (buttonWidth / 2)) && mouseY < (((height / 2) - 50) + buttonHeight)) {
-           if(mouseX < (((width / 2) - (buttonWidth / 2)) + buttonWidth) && mouseY < (((height / 2) - 50) + buttonHeight)) {
-             mainMenu = false;
-             options = true;
-           }
-         }
+     // If options is clicked
+     if(mouseX > ((width/2) - (buttonWidth/2)) && mouseX < ((width/2) + (buttonWidth/2))) {
+       if(mouseY > (((height/2) + 50) - (buttonHeight/2)) && mouseY < ((height/2) + 50) + (buttonWidth/2)) {
+          mainMenu = false;
+          options = true;
        }
-     }
+     } // End options
      
-     // if exit is clicked
-     if(mouseX > ((width / 2) - (buttonWidth / 2)) && mouseY > ((height / 2) - 50)) {
-       if(mouseX < (((width / 2) - (buttonWidth / 2)) + buttonWidth) && mouseY > (((height / 2) - 50))) {
-         if(mouseX > ((width / 2) - (buttonWidth / 2)) && mouseY < (((height / 2) - 50) + buttonHeight)) {
-           if(mouseX < (((width / 2) - (buttonWidth / 2)) + buttonWidth) && mouseY < (((height / 2) - 50) + buttonHeight)) {
-             mainMenu = false;
-             instructionsScreen = true;
-           }
-         }
+     // If exit is clicked
+     if(mouseX > ((width/2) - (buttonWidth/2)) && mouseX < ((width/2) + (buttonWidth/2))) {
+       if(mouseY > (((height/2) + 50) - (buttonHeight/2)) && mouseY < ((height/2) + 50) + (buttonWidth/2)) {
+         exit();
+         stop();
        }
-     }
+     } // End exit
    }
  } // end mousepressed()
 } // End class

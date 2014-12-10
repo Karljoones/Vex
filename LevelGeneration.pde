@@ -9,11 +9,10 @@ Lines on the screen at any one time: 6
 
 class levelGen {
   
-  
   // This is used to generate the start point of the level.
   void startPlatform() {
     stroke(21,231,246);
-    line(0, height-100, width, height-100);
+    line(line1_start.x, line1_start.y, line1_end.x, line1_end.y);
   }
   
   // This is going to be used to check if a line has gone

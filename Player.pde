@@ -5,7 +5,7 @@ class Player {
   // Avatars
   boolean avatar1 = true, avatar2 = false;
   
-  int playerSize = 50, playerSpeed = 20;
+  int playerSize = 50, playerSpeed = 20, playerVSpeed =  10;
   
   void displayStats() {
    // Positions will need to be altered when font is changed
@@ -20,10 +20,19 @@ class Player {
   void move() {
     if(keyPressed) {
       if(keyCode == LEFT) {
-        playerPos.y -= playerSpeed;
+        playerPos.x -= playerSpeed;
+        if(playerPos.x < 0) {
+          playerPos.x = width;
+        }
       }
       if(keyCode == RIGHT) {
-        playerPos.y += playerSpeed;
+        playerPos.x += playerSpeed;
+        if(playerPos.x > width) {
+          playerPos.x = 0;
+        }
+      }
+      if(keyCode == UP) {
+        playerPos.y -= playerVSpeed;
       }
     }
   }
