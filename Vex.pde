@@ -1,4 +1,10 @@
-// TRON inspired game
+// VEX
+
+//Controls
+//
+//Up to jump
+//Right & Left arrows to move side to side
+//P to exit to main menu.
 
 // Class files init
 Screens screen;
@@ -9,8 +15,10 @@ Collision collision;
 
 // Booleans
 boolean debugging = true, mainMenu = true, instructionsScreen = false, play = false, gameOver = false, options = false;
+// User options
+boolean musicOPT = true, SFXOPT= true, lineOrientation = true;
 
-// Level lines
+// Level walls and platforms
 PVector line1_start, line1_end, line2_start, line2_end, line3_start, line3_end, line4_start, line4_end, line5_start, line5_end, line6_start, line6_end;
 
 // Player variables
@@ -24,7 +32,8 @@ PFont mainMenuFont, playerStatsDisplay;
 PImage startScreen;
 
 // Misc
-int buttonWidth = 290, buttonHeight = 90, i;
+int buttonWidth = 290, buttonHeight = 90; // These values are used for all of the menus in the game.
+int i = 0;
 
 void setup() {
  size(displayWidth, displayHeight);
@@ -39,13 +48,11 @@ void setup() {
  // These two functions load all the files amnd initialise the game for the player to be able to play
  load.loadFonts();
  load.loadImages();
+ load.loadVectors();
  
  // Set the players initial spawn
  playerPos = new PVector(width / 2, height / 2);
  
- // Starting lines of the platform. Initialise the starting line
- line1_start = new PVector(0, (height - 100));
- line1_end = new PVector(width, (height - 100));
 }
 
 void draw() {
@@ -63,9 +70,11 @@ void draw() {
     screen.game();
     player.move();
     player.update();
+    generation.check();
   }
-  if(gameOver) {
-    stop();
+  if(options) {
+    collision.options();
+    screen.options();
   }
 }
 

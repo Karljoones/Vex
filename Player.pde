@@ -34,8 +34,12 @@ class Player {
       if(keyCode == UP) {
         playerPos.y -= playerVSpeed;
       }
+      if(key == 'p' || key == 'P') {
+        play = false;
+        mainMenu = true;
+      }
     }
-  }
+  } // End player movement
   
   // Drawing the player
   void update() {
