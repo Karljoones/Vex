@@ -1,3 +1,5 @@
+// Particle system
+
 class Particle {
   PVector location;
   PVector velocity;
@@ -5,12 +7,12 @@ class Particle {
   float lifespan;
   
   // Constructor
-  Particle(PVector l){
-    location = l.get();
-    aceleration = new PVector();
-    velocity = new PVector();
-    lifespan = 255;
-  } 
+//  Particle(PVector l){
+//    location = l.get();
+//    aceleration = new PVector();
+//    velocity = new PVector();
+//    lifespan = 255;
+//  } 
   
   void update() {
     velocity.add(aceleration);

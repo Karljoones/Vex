@@ -1,4 +1,4 @@
-// This class has everything to do with the player.
+// Player
 
 class Player {
   
@@ -6,6 +6,8 @@ class Player {
   boolean avatar1 = true, avatar2 = false;
   
   int playerSize = 50, playerSpeed = 20, playerVSpeed =  10;
+  
+  
   
   void displayStats() {
    // Positions will need to be altered when font is changed
@@ -16,7 +18,7 @@ class Player {
    text("Points: " + playerScore, 70, 65); 
   }
   
-  // Player movement
+// Player movement
   void move() {
     if(keyPressed) {
       if(keyCode == LEFT) {
@@ -39,7 +41,7 @@ class Player {
         mainMenu = true;
       }
     }
-  } // End player movement
+} // End player movement
   
   // Drawing the player
   void update() {
@@ -52,5 +54,6 @@ class Player {
       rectMode(CENTER);
       rect(playerPos.x, playerPos.y, playerSize, playerSize);
     }
-  }
+  } // End update
+  
 }

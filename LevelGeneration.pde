@@ -1,11 +1,6 @@
-/* 
-This fill is used to randomly generate the levels as the player 
-scrolls through them. It needs to be able to detect when a line 
-goes off the screen to replace it with another one starting at
-the end of the previous line and going either vertically or
-horizontally.
-Lines on the screen at any one time: 6
-*/
+//Random generation of the level. It will detect the orientation
+//of the previous segment of the game, and do the opposite of what
+//the previous one was.
 
 class levelGen {
 

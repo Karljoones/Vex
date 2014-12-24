@@ -1,4 +1,4 @@
-// Class to control the collision of the objects
+//Detects button presses for the menus and player collision with objects
 
 class Collision {
 
@@ -37,10 +37,10 @@ class Collision {
          stop();
        }
      } // End exit
-   }
- } // end mousepressed()
+   } // End mousepressed
+ } // End mainmenu
  
- // Options menu
+  // Options menu
   void options() {
    if(mousePressed) {
      
@@ -72,7 +72,8 @@ class Collision {
          mainMenu = true;
        }
      } // End exit
-   }
- } // end mousepressed()
+   } // End mousePressed
+ } // End mousepressed
+ 
 } // End class
   

@@ -1,4 +1,4 @@
-// This class is used to control the splash screens of the game
+// Control of the splash screens
 
 class Screens {
  
@@ -164,11 +164,13 @@ class Screens {
     
     if(debugging) {
      text(frameRate, (width - 80), 30);
-   }
+    }
   } // End options screen
  
+ // Instructions Screen
  void instructionsScreen() {
    background(233,45,34);
- }
-}
+ } // End instructions screen
+ 
+} // End class
 
