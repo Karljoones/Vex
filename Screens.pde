@@ -16,9 +16,8 @@ class Screens {
     textFont(mainMenuFont, 43);
     fill(0);
     noStroke();
-    text("Vex", (width/2), (height/2) - 50);
     rectMode(CENTER);
-    rect((width/2), (height/2), 300, 420, 25, 25, 25, 25);
+    rect((width/2), (height/2), (buttonWidth + 10), 420, 25, 25, 25, 25);
     
     // Start button
     fill(0);
@@ -100,7 +99,7 @@ class Screens {
     noStroke();
     text("Vex", (width/2), (height/2) - 50);
     rectMode(CENTER);
-    rect((width/2), (height/2), 300, 420, 25, 25, 25, 25);
+    rect((width/2), (height/2), (buttonWidth + 10), 420, 25, 25, 25, 25);
     
     // Framerate button
     fill(0);

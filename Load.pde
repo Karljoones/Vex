@@ -43,4 +43,14 @@ class Load {
     line6_end = new PVector(0,0);
   } // End loadVectors
   
+  // Load the music into the game
+  void loadMusic() {
+    
+  } // End loadMusic()
+  
+  // Load the sounds into the game
+  void loadSounds() {
+    
+  } // End loadSounds
+  
 } // End class

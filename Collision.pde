@@ -5,10 +5,9 @@ class Collision {
  // Main menu
  void mainMenu() {
    if(mousePressed) {
-     
      // If start is clicked
      if(mouseX > ((width/2) - (buttonWidth/2)) && mouseX < ((width/2) + (buttonWidth/2))) {
-       if(mouseY > (((height/2) - 150) - (buttonHeight/2)) && mouseY < ((height/2) - 150) + (buttonWidth/2)) {
+       if(mouseY > (((height/2) - 150) - (buttonHeight/2)) && mouseY < ((height/2) - 150) + (buttonHeight/2)) {
           mainMenu = false;
           play = true;
        }
@@ -16,7 +15,7 @@ class Collision {
      
      // If instructions is clicked
      if(mouseX > ((width/2) - (buttonWidth/2)) && mouseX < ((width/2) + (buttonWidth/2))) {
-       if(mouseY > (((height/2) - 50) - (buttonHeight/2)) && mouseY < ((height/2) - 50) + (buttonWidth/2)) {
+       if(mouseY > (((height/2) - 50) - (buttonHeight/2)) && mouseY < ((height/2) - 50) + (buttonHeight/2)) {
           mainMenu = false;
           instructionsScreen = true;
        }
@@ -24,7 +23,7 @@ class Collision {
      
      // If options is clicked
      if(mouseX > ((width/2) - (buttonWidth/2)) && mouseX < ((width/2) + (buttonWidth/2))) {
-       if(mouseY > (((height/2) + 50) - (buttonHeight/2)) && mouseY < ((height/2) + 50) + (buttonWidth/2)) {
+       if(mouseY > (((height/2) + 50) - (buttonHeight/2)) && mouseY < ((height/2) + 50) + (buttonHeight/2)) {
           mainMenu = false;
           options = true;
        }
@@ -32,9 +31,10 @@ class Collision {
      
      // If exit is clicked
      if(mouseX > ((width/2) - (buttonWidth/2)) && mouseX < ((width/2) + (buttonWidth/2))) {
-       if(mouseY > (((height/2) + 50) - (buttonHeight/2)) && mouseY < ((height/2) + 50) + (buttonWidth/2)) {
+       if(mouseY > (((height/2) + 50) - (buttonHeight/2)) && mouseY < ((height/2) + 50) + (buttonHeight/2)) {
          exit();
          stop();
+         // Game is ended
        }
      } // End exit
    } // End mousepressed
@@ -46,34 +46,34 @@ class Collision {
      
      // Debugging
      if(mouseX > ((width/2) - (buttonWidth/2)) && mouseX < ((width/2) + (buttonWidth/2))) {
-       if(mouseY > (((height/2) - 150) - (buttonHeight/2)) && mouseY < ((height/2) - 150) + (buttonWidth/2)) {
+       if(mouseY > (((height/2) - 150) - (buttonHeight/2)) && mouseY < ((height/2) - 150) + (buttonHeight/2)) {
           debugging = !debugging;
        }
      } 
      
      // Music
      if(mouseX > ((width/2) - (buttonWidth/2)) && mouseX < ((width/2) + (buttonWidth/2))) {
-       if(mouseY > (((height/2) - 50) - (buttonHeight/2)) && mouseY < ((height/2) - 50) + (buttonWidth/2)) {
+       if(mouseY > (((height/2) - 50) - (buttonHeight/2)) && mouseY < ((height/2) - 50) + (buttonHeight/2)) {
           musicOPT = !musicOPT;
        }
      } 
      
      // Sound effects
      if(mouseX > ((width/2) - (buttonWidth/2)) && mouseX < ((width/2) + (buttonWidth/2))) {
-       if(mouseY > (((height/2) + 50) - (buttonHeight/2)) && mouseY < ((height/2) + 50) + (buttonWidth/2)) {
+       if(mouseY > (((height/2) + 50) - (buttonHeight/2)) && mouseY < ((height/2) + 50) + (buttonHeight/2)) {
           SFXOPT = !SFXOPT;
        }
      } 
      
-     // Back to mani menu
+     // Back to main menu
      if(mouseX > ((width/2) - (buttonWidth/2)) && mouseX < ((width/2) + (buttonWidth/2))) {
-       if(mouseY > (((height/2) + 50) - (buttonHeight/2)) && mouseY < ((height/2) + 50) + (buttonWidth/2)) {
+       if(mouseY > (((height/2) + 50) - (buttonHeight/2)) && mouseY < ((height/2) + 50) + (buttonHeight/2)) {
          options = false;
          mainMenu = true;
        }
      } // End exit
    } // End mousePressed
- } // End mousepressed
+ } // End options
  
 } // End class
   
