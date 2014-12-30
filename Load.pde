@@ -10,7 +10,7 @@ class Load {
   
   // Load the images into the game
   void loadImages() {
-    startScreen = loadImage("startscreen.jpg"); 
+    
   } // End loadImages
   
   // Initialise player stats
@@ -45,12 +45,13 @@ class Load {
   
   // Load the music into the game
   void loadMusic() {
-    
+    mainMenuMusic = minim.loadFile("mainMenuMusic.mp3", 2048);
+    themeSong = minim.loadFile("themeSong.mp3", 2048);    
   } // End loadMusic()
   
   // Load the sounds into the game
   void loadSounds() {
-    
+    selectKey = minim.loadFile("Blip_Select.wav");
   } // End loadSounds
   
 } // End class

@@ -7,8 +7,6 @@ class Player {
   
   int playerSize = 50, playerSpeed = 20, playerVSpeed =  10;
   
-  
-  
   void displayStats() {
    // Positions will need to be altered when font is changed
    textFont(playerStatsDisplay, 30);
@@ -39,6 +37,9 @@ class Player {
       if(key == 'p' || key == 'P') {
         play = false;
         mainMenu = true;
+        themeSong.close();
+        mainMenuMusic = minim.loadFile("mainMenuMusic.mp3", 2048);
+        mainMenuMusic.loop();
       }
     }
 } // End player movement
