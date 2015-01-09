@@ -2,7 +2,7 @@
 
 class levelGen{
   
-  // This is used to generate the platforms of the game
+  // This is used to generate the platforms of the game.
   void platforms() {
     stroke(255, 0, 0);
     line(line1_start.x, line1_start.y, line1_end.x, line1_end.y);
@@ -28,9 +28,10 @@ class levelGen{
       line2_start.set(line1_end.x, line1_end.y);
       line2_end.set(line2_start.x, line2_start.y + random(verticalMin, verticalMax));
       if(line2_end.y > height){
-        line2_end.y = -random(100, verticalMax);
-      } else if (line2_end.y < 0) {
-        line2_end.y = random(100, verticalMax);
+        line2_end.y = -random(verticalMin, verticalMax);
+      }
+      if (line2_end.y < 0) {
+        line2_end.y = random(verticalMin, verticalMax);
       }
     }
     
@@ -45,9 +46,10 @@ class levelGen{
       line4_start.set(line3_end.x, line3_end.y);
       line4_end.set(line4_start.x, line4_start.y + random(verticalMin, verticalMax));
       if(line4_end.y > height){
-        line4_end.y = -random(100, verticalMax);
-      } else if (line4_end.y < 0) {
-        line4_end.y = random(100, verticalMax);
+        line4_end.y = -random(verticalMin, verticalMax);
+      } 
+      if (line4_end.y < 0) {
+        line4_end.y = random(verticalMin, verticalMax);
       }
     }
     
@@ -62,9 +64,10 @@ class levelGen{
       line6_start.set(line5_end.x, line5_end.y);
       line6_end.set(line6_start.x, line6_start.y + random(verticalMin, verticalMax));
       if(line6_end.y > height){
-        line6_end.y = -random(100, verticalMax);
-      } else if (line6_end.y < 0) {
-        line6_end.y = random(100, verticalMax);
+        line6_end.y = -random(verticalMin, verticalMax);
+      } 
+      if (line6_end.y < 0) {
+        line6_end.y = random(verticalMin, verticalMax);
       }
     }
     
@@ -79,9 +82,10 @@ class levelGen{
       line8_start.set(line7_end.x, line7_end.y);
       line8_end.set(line8_start.x, line8_start.y + random(verticalMin, verticalMax));
       if(line8_end.y > height){
-        line8_end.y = -random(100, verticalMax);
-      } else if (line8_end.y < 0) {
-        line8_end.y = random(100, verticalMax);
+        line8_end.y = -random(verticalMin, verticalMax);
+      } 
+      if (line8_end.y < 0) {
+        line8_end.y = random(verticalMin, verticalMax);
       }
     }
 

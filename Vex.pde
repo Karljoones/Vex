@@ -12,6 +12,7 @@ Load load;
 levelGen generation;
 Menu collision;
 Particle ps;
+Collision pCollision;
 
 // Booleans
 boolean mainMenu = true, instructionsScreen = false, play = false, gameOver = false, options = false;
@@ -25,15 +26,19 @@ PVector line1_start, line1_end, line2_start, line2_end, line3_start, line3_end, 
 // Player related variables
 PVector playerPos;
 int playerScore, playerCoins;
+boolean movingRight = false, movingLeft = false;
 
 // Fonts
 PFont mainMenuFont, playerStatsDisplay, instructions;
 
+// Images
+PImage logo;
+
 // Misc
-int buttonWidth = 310, buttonHeight = 90; // These values are used for all of the menus in the game.
+int buttonWidth = 310, buttonHeight = 90; 
 int i = 0, lineMin = 400, lineMax = 2000, verticalMin = -200, verticalMax = 200;
 
-// Sounds
+// Music and sound effects of the game.
 AudioPlayer mainMenuMusic, selectKey, themeSong;
 
 // These are for control over the sine wave in the main menu.
@@ -44,7 +49,7 @@ float[] yvalues;
 void setup() {
  size(displayWidth, displayHeight);
  frame.setResizable(true); 
- frameRate(60);
+ frameRate(180);
  
  // Initialise classes
  screen = new Screens();
@@ -53,6 +58,7 @@ void setup() {
  generation = new levelGen();
  collision = new Menu();
  ps = new Particle();
+ pCollision = new Collision();
  
  minim = new Minim(this);
  
@@ -61,7 +67,7 @@ void setup() {
  load.loadMusic();
  load.loadSounds();
  
- playerPos = new PVector(width / 2, height / 2);
+ playerPos = new PVector(width / 2, height / 2 + 200);
  
  if(musicOPT){
    mainMenuMusic.loop();

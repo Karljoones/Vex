@@ -4,6 +4,9 @@ class Screens {
   void mainMenu() {
     clear();
     background(0);
+    
+    imageMode(CENTER);
+    image(logo, width / 2, 100, 300, 150);
 
     // Waveform or sine wave
     if(musicOPT) {

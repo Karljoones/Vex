@@ -9,7 +9,7 @@ class Load {
   
   // Load the images into the game
   void loadImages() {
-    // None at present.
+    logo = loadImage("VexLogo.png");
   }
   
   // Initialise player stats
@@ -26,8 +26,8 @@ class Load {
     line1_end = new PVector(width - 50, height - 100);
     
     // Vertical
-    line2_start = new PVector(line1_end.x, line1_end.y); // Start point of the line same as the end point of the one before it.
-    line2_end = new PVector(line2_start.x, line2_start.y + -random(20, verticalMax)); // Line goes upwards to a random point, x value stays the same, needs to change so that it can go downwards
+    line2_start = new PVector(line1_end.x, line1_end.y);
+    line2_end = new PVector(line2_start.x, line2_start.y + -random(20, verticalMax));
     
     //Horizontal
     line3_start = new PVector(line2_end.x, line2_end.y);

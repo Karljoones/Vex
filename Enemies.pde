@@ -5,3 +5,5 @@ class Enemy {
     load.loadTextFiles();
   } // End nameGenerateEnemy()
 } // End class
+
+
