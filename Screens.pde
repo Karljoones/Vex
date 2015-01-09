@@ -1,5 +1,3 @@
-// Control of the splash screens
-
 class Screens {
   
   // Main menu screen
@@ -103,7 +101,6 @@ class Screens {
       text(frameRate, (width - 80), 30);
     }
 
-    // Always called last, want to be above EVERYTHING else all of the time that the gameplay is happening. Needs to be called last in order to do so.
     noStroke();
     fill(255);
     player.displayStats();
@@ -235,7 +232,7 @@ class Screens {
       yvalues[i] = sin(x) * amplitude;
       x+=dx;
     }
-  } // end calcWave()
+  }
   
   void renderWave() {
     noStroke();
@@ -244,7 +241,7 @@ class Screens {
     for(int x = 0; x < yvalues.length ; x++ ) {
       ellipse(x*spacing, height/2+yvalues[x], 16,16);
     } 
-  } // End renderWave()
+  }
   
 } // End class
 

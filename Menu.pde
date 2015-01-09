@@ -1,5 +1,3 @@
-//Detects button presses for the menus
-
 class Menu {
   
  // Main menu
@@ -11,7 +9,8 @@ class Menu {
           delay(200);
           mainMenu = false;
           play = true; 
-         
+          load.loadVectors();
+          
           if(SFXOPT) {
             selectKey.play();
           }

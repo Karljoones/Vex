@@ -1,13 +1,8 @@
-// VEX
-
-//Controls
-//
-//Up to jump
-//Right & Left arrows to move side to side
-//P to exit to main menu.
+//     Vex
+//    -----
+// Karl Jones
 
 import ddf.minim.*;
-
 Minim minim;
 
 // Class files init
@@ -24,11 +19,10 @@ boolean mainMenu = true, instructionsScreen = false, play = false, gameOver = fa
 // User defined options
 boolean musicOPT = false, SFXOPT = true, debugging = true;
 
-// Level walls and platforms
-PVector line1_start, line1_end, line2_start, line2_end, line3_start, line3_end, line4_start, line4_end, line5_start, line5_end, line6_start, line6_end;
-boolean lineOrientation = true;
+// Level
+PVector line1_start, line1_end, line2_start, line2_end, line3_start, line3_end, line4_start, line4_end, line5_start, line5_end, line6_start, line6_end, line7_start, line7_end, line8_start, line8_end;
 
-//// Player variables
+// Player related variables
 PVector playerPos;
 int playerScore, playerCoins;
 
@@ -37,7 +31,7 @@ PFont mainMenuFont, playerStatsDisplay, instructions;
 
 // Misc
 int buttonWidth = 310, buttonHeight = 90; // These values are used for all of the menus in the game.
-int i = 0, delay = 300;
+int i = 0, lineMin = 400, lineMax = 2000, verticalMin = -200, verticalMax = 200;
 
 // Sounds
 AudioPlayer mainMenuMusic, selectKey, themeSong;
@@ -64,7 +58,6 @@ void setup() {
  
  load.loadFonts();
  load.loadImages();
- load.loadVectors();
  load.loadMusic();
  load.loadSounds();
  
@@ -104,11 +97,12 @@ void draw() {
     screen.game();
     player.move();
     player.update();
+    generation.platforms();
     generation.check();
     
     if(musicOPT) {
       if(!themeSong.isLooping()) {
-      themeSong.loop();
+        themeSong.loop();
       }
     }
   }

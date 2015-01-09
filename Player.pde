@@ -1,5 +1,3 @@
-// Player
-
 class Player {
   
   // Avatars, to be implemented at a later stage in the game development.
@@ -19,8 +17,7 @@ class Player {
 // Player movement
   void move() {
     if(keyPressed) {
-      if(keyCode == LEFT) {
-        // Move all of the platforms with it, y never needs to be changed.
+      if(keyCode == RIGHT) {
         line1_start.x -= playerSpeed;
         line1_end.x -= playerSpeed;
         line2_start.x -= playerSpeed;
@@ -34,8 +31,7 @@ class Player {
         line6_start.x -= playerSpeed;
         line6_end.x -= playerSpeed;
       }
-      if(keyCode == RIGHT) {
-        // Move all of the platforms with it, y never needs to be changed.
+      if(keyCode == LEFT) {
         line1_start.x += playerSpeed;
         line1_end.x += playerSpeed;
         line2_start.x += playerSpeed;
@@ -57,8 +53,10 @@ class Player {
         play = false;
         mainMenu = true;
         themeSong.close();
-        mainMenuMusic = minim.loadFile("mainMenuMusic.mp3", 2048);
-        mainMenuMusic.loop();
+        if(musicOPT) {
+          mainMenuMusic = minim.loadFile("mainMenuMusic.mp3", 2048);
+          mainMenuMusic.loop();
+        }
       }
     }
 } // End player movement
@@ -66,7 +64,7 @@ class Player {
   // Drawing the player
   void update() {
     
-    // Drawing the player, depending on the avatar that they have chosen
+    // Avatars will be added at a later stage to the game.
     if(avatar1) {
       
       stroke(255);
