@@ -2,7 +2,7 @@
 
 class Player {
   
-  // Avatars
+  // Avatars, to be implemented at a later stage in the game development.
   boolean avatar1 = true, avatar2 = false;
   
   int playerSize = 50, playerSpeed = 20, playerVSpeed =  10;
@@ -12,7 +12,7 @@ class Player {
    textFont(playerStatsDisplay, 30);
    textAlign(CENTER);
    stroke(255);
-   text("Lives : " + playerLives, 70, 30);
+   text("Coins : " + playerCoins, 70, 30);
    text("Points: " + playerScore, 70, 65); 
   }
   
@@ -20,21 +20,40 @@ class Player {
   void move() {
     if(keyPressed) {
       if(keyCode == LEFT) {
-        playerPos.x -= playerSpeed;
-        if(playerPos.x < 0) {
-          playerPos.x = width;
-        }
+        // Move all of the platforms with it, y never needs to be changed.
+        line1_start.x -= playerSpeed;
+        line1_end.x -= playerSpeed;
+        line2_start.x -= playerSpeed;
+        line2_end.x -= playerSpeed;
+        line3_start.x -= playerSpeed;
+        line3_end.x -= playerSpeed;
+        line4_start.x -= playerSpeed;
+        line4_end.x -= playerSpeed;
+        line5_start.x -= playerSpeed;
+        line5_end.x -= playerSpeed;
+        line6_start.x -= playerSpeed;
+        line6_end.x -= playerSpeed;
       }
       if(keyCode == RIGHT) {
-        playerPos.x += playerSpeed;
-        if(playerPos.x > width) {
-          playerPos.x = 0;
-        }
+        // Move all of the platforms with it, y never needs to be changed.
+        line1_start.x += playerSpeed;
+        line1_end.x += playerSpeed;
+        line2_start.x += playerSpeed;
+        line2_end.x += playerSpeed;
+        line3_start.x += playerSpeed;
+        line3_end.x += playerSpeed;
+        line4_start.x += playerSpeed;
+        line4_end.x += playerSpeed;
+        line5_start.x += playerSpeed;
+        line5_end.x += playerSpeed;
+        line6_start.x += playerSpeed;
+        line6_end.x += playerSpeed;
       }
       if(keyCode == UP) {
-        playerPos.y -= playerVSpeed;
+        // Y should change when the player jumps
       }
-      if(key == 'p' || key == 'P') {
+      // Exit to the menu.
+      if(key == 'm' || key == 'M') {
         play = false;
         mainMenu = true;
         themeSong.close();

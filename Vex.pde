@@ -22,7 +22,7 @@ Particle ps;
 boolean mainMenu = true, instructionsScreen = false, play = false, gameOver = false, options = false;
 
 // User defined options
-boolean musicOPT = true, SFXOPT = true, debugging = true;
+boolean musicOPT = false, SFXOPT = true, debugging = true;
 
 // Level walls and platforms
 PVector line1_start, line1_end, line2_start, line2_end, line3_start, line3_end, line4_start, line4_end, line5_start, line5_end, line6_start, line6_end;
@@ -30,13 +30,10 @@ boolean lineOrientation = true;
 
 //// Player variables
 PVector playerPos;
-int playerScore, playerLives;
+int playerScore, playerCoins;
 
 // Fonts
-PFont mainMenuFont, playerStatsDisplay;
-
-// Images
-PImage startScreen;
+PFont mainMenuFont, playerStatsDisplay, instructions;
 
 // Misc
 int buttonWidth = 310, buttonHeight = 90; // These values are used for all of the menus in the game.
@@ -65,14 +62,12 @@ void setup() {
  
  minim = new Minim(this);
  
- // These two functions load all the files and initialise the game for the player to be able to play
  load.loadFonts();
  load.loadImages();
  load.loadVectors();
  load.loadMusic();
  load.loadSounds();
  
- // Set the players initial spawn in the world
  playerPos = new PVector(width / 2, height / 2);
  
  if(musicOPT){

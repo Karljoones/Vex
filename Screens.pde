@@ -204,10 +204,22 @@ class Screens {
 
   // Instructions Screen
   void instructionsScreen() {
-    background(233, 45, 34);
+    background(0);
+    
+    // Instructions need to be changed when the controls are implemented
+    textAlign(CENTER);
+    textFont(instructions, 70);
+    fill(255);
+    
+    text("HOW TO PLAY", width/2, height/2-200);
+    
+    textFont(instructions, 55);
+    
+    text(" Use the RIGHT \n LEFT arrows to move \n UP to jump \n P to pause \n M to return to main menu", width / 2, height / 2 - 100);
+    
 
     if (keyPressed) {
-      if (key == 'p' || key == 'P') {
+      if (key == 'm' || key == 'M') {
         mainMenu = true;
         instructionsScreen = false;
       }
