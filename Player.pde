@@ -2,7 +2,7 @@ class Player {
   
   // Avatars, to be implemented at a later stage in the game development.
   boolean avatar1 = true, avatar2 = false;
-  int playerSize = 50, playerSpeed = 20, playerVSpeed =  10;
+  int playerSpeed = 20, playerVSpeed = 10;
   
   void displayStats() {
    textFont(playerStatsDisplay, 30);
@@ -95,7 +95,6 @@ class Player {
       
       stroke(255);
       noFill();
-      rectMode(CENTER);
       rect(playerPos.x, playerPos.y, playerSize, playerSize);
     }
   } // End update

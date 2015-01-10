@@ -25,8 +25,9 @@ PVector line1_start, line1_end, line2_start, line2_end, line3_start, line3_end, 
 
 // Player related variables
 PVector playerPos;
-int playerScore, playerCoins;
+int playerScore, playerCoins, playerSize = 50;
 boolean movingRight = false, movingLeft = false;
+float[] playerBoundaries = new float[8];
 
 // Fonts
 PFont mainMenuFont, playerStatsDisplay, instructions;
@@ -78,6 +79,7 @@ void setup() {
  dx = (TWO_PI / period) * spacing;
  yvalues = new float[int(w/spacing)];
  
+ pCollision.checkPlayerBoundaries();
 }
 
 void draw() {
