@@ -5,7 +5,7 @@
 import ddf.minim.*;
 Minim minim;
 
-// Class files init
+// Class files initialisation
 Screens screen;
 Player player;
 Load load;
@@ -14,7 +14,7 @@ Menu collision;
 Particle ps;
 Collision pCollision;
 
-// Booleans
+// Booleans for the splash screens.
 boolean mainMenu = true, instructionsScreen = false, play = false, gameOver = false, options = false;
 
 // User defined options
@@ -26,7 +26,7 @@ PVector line1_start, line1_end, line2_start, line2_end, line3_start, line3_end, 
 // Player related variables
 PVector playerPos;
 int playerScore, playerCoins, playerSize = 50;
-boolean movingRight = false, movingLeft = false;
+boolean movingRight = false;
 float[] playerBoundaries = new float[8];
 
 // Fonts
@@ -83,7 +83,7 @@ void setup() {
 }
 
 void draw() {
-  background(0); 
+  background(0);
   println(frameRate);
   
   if(mainMenu) {
@@ -104,8 +104,8 @@ void draw() {
   if(play) {
     screen.game();
     player.move();
-    player.update();
-    generation.platforms();
+    player.draw();
+    generation.draw();
     generation.check();
     
     if(musicOPT) {
@@ -121,6 +121,27 @@ void draw() {
   }
   
 } // End draw
+
+void keyPressed() {
+  // Keys pressed during game play.
+  if(play){
+    if(key == CODED) {
+      if(keyCode == RIGHT) {
+        movingRight = true;
+      }
+    }
+  } // End if(play)
+} // End keyPressed()
+
+void keyReleased() {
+  if(play) {
+    if(key == CODED) {
+      if(key == RIGHT) {
+        movingRight = false;
+      }
+    }
+  } // End if(play)
+} //End keyReleased()
 
 
 

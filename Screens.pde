@@ -101,7 +101,7 @@ class Screens {
     
     if (debugging) {
       fill(255);
-      text(frameRate, (width - 80), 30);
+      text(frameRate + "FPS", (width - 80), 30);
     }
 
     noStroke();
@@ -195,10 +195,8 @@ class Screens {
     fill(21, 231, 246);
     text("Back", (width/2), (height/2) + 170); 
 
-    // End of buttons
-
     if (debugging) {
-      text(frameRate, (width - 80), 30);
+      text(frameRate + "FPS", (width - 80), 30);
     }
   } // End options screen
 
@@ -206,18 +204,14 @@ class Screens {
   void instructionsScreen() {
     background(0);
     
-    // Instructions need to be changed when the controls are implemented
+    // Instructions need to be changed when the starter code is implemented into the code.
     textAlign(CENTER);
     textFont(instructions, 70);
     fill(255);
-    
     text("HOW TO PLAY", width/2, height/2-200);
-    
     textFont(instructions, 55);
+    text(" Use the RIGHT \n arrow to move \n UP to jump \n P to pause \n M to return to main menu\n KEEP MOVING RIGHT", width / 2, height / 2 - 100);
     
-    text(" Use the RIGHT \n LEFT arrows to move \n UP to jump \n P to pause \n M to return to main menu", width / 2, height / 2 - 100);
-    
-
     if (keyPressed) {
       if (key == 'm' || key == 'M') {
         mainMenu = true;
@@ -226,6 +220,7 @@ class Screens {
     }
   } // End instructions screen
   
+  // Sine wave control.
   void calcWave() {
     theta += 0.02;
     
@@ -236,7 +231,6 @@ class Screens {
       x+=dx;
     }
   }
-  
   void renderWave() {
     noStroke();
     fill(255, 30);

@@ -8,7 +8,7 @@ class Menu {
        if(mouseY > (((height/2) - 150) - (buttonHeight/2)) && mouseY < ((height/2) - 150) + (buttonHeight/2)) {
           delay(200);
           mainMenu = false;
-          play = true; 
+          play = true;
           load.loadVectors();
           
           if(SFXOPT) {
@@ -90,7 +90,6 @@ class Menu {
             selectKey.play();
           }
           
-          // This stops the music if it it playing and turned off, but plays if it was turned back on.
           if(!musicOPT){
             mainMenuMusic.close();
           } else {
