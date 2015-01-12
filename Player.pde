@@ -2,7 +2,17 @@ class Player {
   
   // Avatars, to be implemented at a later stage in the game development.
   boolean avatar1 = true;
-  int playerSpeed = 20, playerVSpeed = 10;
+  boolean isOnGround;
+  
+  // Jump power and run speed can be added to by the upgrades, these are just the bases for the start of the game with no upgrades.
+  static final float jump_power = 11.0, run_speed = 5.0, air_run = 2.0, friction = 0.6, air_resist = 0.85;
+  
+  // Player class constructor
+  Player() {
+    isOnGround = false;
+    playerPos = new PVector(50, 300);
+    velocity = new PVector();
+  }
   
   // Display the stats of the player, coins and their score.
   void displayStats() {
@@ -12,24 +22,32 @@ class Player {
    text("Coins : " + playerCoins, 70, 30);
    text("Points: " + playerScore, 70, 65); 
   } // End displayStats()
-  
-  // Player movement, player can only move to the right.
-  void move() {
-    while(movingRight) {
-      line1_start.x -= playerSpeed;
-      line1_end.x -= playerSpeed;
-      line2_start.x -= playerSpeed;
-      line2_end.x -= playerSpeed;
-      line3_start.x -= playerSpeed;
-      line3_end.x -= playerSpeed;
-      line4_start.x -= playerSpeed;
-      line4_end.x -= playerSpeed;
-      line5_start.x -= playerSpeed;
-      line5_end.x -= playerSpeed;
-      line6_start.x -= playerSpeed;
-      line6_end.x -= playerSpeed;
+
+  void input() {
+    pCollision.checkFalling();
+    float curSpeed = (isOnGround ? run_speed : air_run);
+    float curFriction = (isOnGround ? friction : air_resist);
+    
+    if(holdingRight) {
+      velocity.x += curSpeed;
     }
-  } // End player movement
+    
+    velocity.x *= curFriction;
+    
+    if(pCollision.isOnGround()) {
+      if(holdingUp) {
+        velocity.y = -jump_power;
+      }
+    } else {
+      velocity.y += gravity;
+    }
+  } // End input()
+  
+  void move() {
+    playerPos.add(velocity);
+    
+    pCollision.playerWalls();
+  }
   
   // Drawing the player, more avatars are to be added in the future, this gives the code room for expansion by simply adding the code, 
   void draw() {

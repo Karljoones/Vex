@@ -11,6 +11,8 @@ class Menu {
           play = true;
           load.loadVectors();
           
+          noCursor();
+          
           if(SFXOPT) {
             selectKey.play();
           }

@@ -14,19 +14,19 @@ Menu collision;
 Particle ps;
 Collision pCollision;
 
-// Booleans for the splash screens.
+// Booleans for the splash screens and options
 boolean mainMenu = true, instructionsScreen = false, play = false, gameOver = false, options = false;
-
-// User defined options
 boolean musicOPT = false, SFXOPT = true, debugging = true;
 
 // Level
 PVector line1_start, line1_end, line2_start, line2_end, line3_start, line3_end, line4_start, line4_end, line5_start, line5_end, line6_start, line6_end, line7_start, line7_end, line8_start, line8_end;
+static final int lineMin = 400, lineMax = 2000, verticalMin = -200, verticalMax = 200, buttonWidth = 310, buttonHeight = 90;
+final float gravity = 0.5;
 
 // Player related variables
-PVector playerPos;
+PVector playerPos, velocity;
 int playerScore, playerCoins, playerSize = 50;
-boolean movingRight = false;
+boolean holdingRight, holdingUp;
 float[] playerBoundaries = new float[8];
 
 // Fonts
@@ -36,8 +36,7 @@ PFont mainMenuFont, playerStatsDisplay, instructions;
 PImage logo;
 
 // Misc
-int buttonWidth = 310, buttonHeight = 90; 
-int i = 0, lineMin = 400, lineMax = 2000, verticalMin = -200, verticalMax = 200;
+int i = 0;
 
 // Music and sound effects of the game.
 AudioPlayer mainMenuMusic, selectKey, themeSong;
@@ -67,8 +66,6 @@ void setup() {
  load.loadImages();
  load.loadMusic();
  load.loadSounds();
- 
- playerPos = new PVector(width / 2, height / 2 + 200);
  
  if(musicOPT){
    mainMenuMusic.loop();
@@ -103,11 +100,12 @@ void draw() {
   
   if(play) {
     screen.game();
+    player.input();
     player.move();
     player.draw();
     generation.draw();
     generation.check();
-    
+    println("isOnGround() = " + player.isOnGround);
     if(musicOPT) {
       if(!themeSong.isLooping()) {
         themeSong.loop();
@@ -125,20 +123,26 @@ void draw() {
 void keyPressed() {
   // Keys pressed during game play.
   if(play){
-    if(key == CODED) {
-      if(keyCode == RIGHT) {
-        movingRight = true;
-      }
+    if(keyCode == RIGHT) {
+      holdingRight = true;
+    }
+    if(keyCode == UP) {
+      holdingUp = true;
     }
   } // End if(play)
 } // End keyPressed()
 
 void keyReleased() {
   if(play) {
-    if(key == CODED) {
-      if(key == RIGHT) {
-        movingRight = false;
-      }
+    if(keyCode == RIGHT) {
+      holdingRight = false;
+    }
+    if(keyCode == UP) {
+      holdingUp = false;
+    }
+    if(key == 'm' || key == 'M'){
+      mainMenu = true;
+      play = false;
     }
   } // End if(play)
 } //End keyReleased()

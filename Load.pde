@@ -16,6 +16,8 @@ class Load {
   void initialiseGame() {
     playerCoins = 0;
     playerScore = 0;
+    velocity.x = 0;
+    velocity.y = 0;
   }
   
   // Initialise the vectors, what they start out as, needs to sort itself out while playing the game.

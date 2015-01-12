@@ -8,6 +8,8 @@ class Screens {
     imageMode(CENTER);
     image(logo, width / 2, 100, 300, 150);
 
+    cursor(CROSS);
+
     // Waveform or sine wave
     if(musicOPT) {
       stroke(255, 50);
@@ -127,6 +129,8 @@ class Screens {
       renderWave();
     }
 
+    cursor(CROSS);
+    
     // Options buttons
     stroke(255);
     fill(206, 245, 247);
