@@ -76,6 +76,7 @@ void setup() {
  dx = (TWO_PI / period) * spacing;
  yvalues = new float[int(w/spacing)];
  
+ // This only needs to be run once as the player does not move.
  pCollision.checkPlayerBoundaries();
 }
 
@@ -105,6 +106,7 @@ void draw() {
     player.draw();
     generation.draw();
     generation.check();
+    
     println("isOnGround() = " + player.isOnGround);
     if(musicOPT) {
       if(!themeSong.isLooping()) {

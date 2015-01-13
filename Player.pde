@@ -25,6 +25,7 @@ class Player {
 
   void input() {
     pCollision.checkFalling();
+    
     float curSpeed = (isOnGround ? run_speed : air_run);
     float curFriction = (isOnGround ? friction : air_resist);
     
@@ -44,7 +45,23 @@ class Player {
   } // End input()
   
   void move() {
-    playerPos.add(velocity);
+    // Since the player does not move, the velocity is subtracted (so it goes the right way) from the platforms and walls.
+    line1_start.sub(velocity);
+    line1_end.sub(velocity);
+    line2_start.sub(velocity);
+    line2_end.sub(velocity);
+    line3_start.sub(velocity);
+    line3_end.sub(velocity);
+    line4_start.sub(velocity);
+    line4_end.sub(velocity);
+    line5_start.sub(velocity);
+    line5_end.sub(velocity);
+    line6_start.sub(velocity);
+    line6_end.sub(velocity);
+    line7_start.sub(velocity);
+    line7_end.sub(velocity);
+    line8_start.sub(velocity);
+    line8_end.sub(velocity);
     
     pCollision.playerWalls();
   }
@@ -57,5 +74,11 @@ class Player {
       noFill();
       rect(playerPos.x, playerPos.y, playerSize, playerSize);
     }
+    
+    // To add another
+    // if(avatarN) {
+      
+    // }
+    
   } // End draw()
 } // End class

@@ -46,20 +46,21 @@ class Collision {
     return hittingWall;
   }
   
+  // Checking if the player is sitting on a platform or not.
   boolean isOnGround(){
-    if(playerBoundaries[5] == line1_start.x || playerBoundaries[7] == line1_start.x) {
+    if(playerBoundaries[5] >= line1_start.y || playerBoundaries[7] >= line1_start.y) {
       whichLine = 1;
       isOnGround = true;
       return true;
-    } else if(playerBoundaries[5] == line3_start.x || playerBoundaries[7] == line3_start.x) {
+    } else if(playerBoundaries[5] >= line3_start.y || playerBoundaries[7] >= line3_start.y) {
       whichLine = 3;
       isOnGround = true;
       return true;
-    } else if(playerBoundaries[5] == line5_start.x || playerBoundaries[7] == line5_start.x) {
+    } else if(playerBoundaries[5] >= line5_start.y || playerBoundaries[7] >= line5_start.y) {
       whichLine = 5;
       isOnGround = true;
       return true;
-    } else if(playerBoundaries[5] == line7_start.x || playerBoundaries[7] == line7_start.x) {
+    } else if(playerBoundaries[5] >= line7_start.y || playerBoundaries[7] >= line7_start.y) {
       whichLine = 7;
       isOnGround = true;
       return true;
@@ -67,7 +68,7 @@ class Collision {
       isOnGround = false;
       return false;
     }
-  }
+  } // End isOnGround()
   
   void checkFalling(){
     if(!isOnGround()) {
