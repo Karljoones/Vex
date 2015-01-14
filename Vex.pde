@@ -27,7 +27,7 @@ final float gravity = 0.5;
 // Player related variables
 PVector playerPos, velocity;
 int playerScore, playerCoins, playerSize = 50;
-boolean holdingRight, holdingUp;
+boolean holdingRight, holdingUp = false;
 float[] playerBoundaries = new float[8];
 
 // Fonts
@@ -97,11 +97,11 @@ void draw() {
     
     collision.mainMenu();
     screen.mainMenu();
-  }
+  } // End if(mainMenu)
   
   if(instructionsScreen) {
     screen.instructionsScreen();
-  }
+  } // End if(instructinosScreen)
   
   if(play) {
     screen.game();
@@ -115,12 +115,12 @@ void draw() {
         themeSong.loop();
       }
     }
-  }
+  } // End if(play)
   
   if(options) {
     collision.options();
     screen.options();
-  }
+  } // End if(options)
   
 } // End draw
 
@@ -144,6 +144,8 @@ void keyReleased() {
     if(keyCode == UP) {
       holdingUp = false;
     }
+    
+    // return to the main menu
     if(key == 'm' || key == 'M'){
       mainMenu = true;
       play = false;

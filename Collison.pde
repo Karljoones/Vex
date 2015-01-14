@@ -10,10 +10,15 @@ class Collision {
   boolean playerWalls() {
     boolean hittingWall = true;
     
-    line2_Status = (line2_start.y > line2_end.y ? "DOWN" : "UP" );
-    line4_Status = (line4_start.y > line4_end.y ? "DOWN" : "UP" );
-    line6_Status = (line6_start.y > line6_end.y ? "DOWN" : "UP" );
-    line8_Status = (line8_start.y > line8_end.y ? "DOWN" : "UP" );
+    line2_Status = (line2_start.y > line2_end.y ? "UP" : "DOWN" );
+    line4_Status = (line4_start.y > line4_end.y ? "UP" : "DOWN" );
+    line6_Status = (line6_start.y > line6_end.y ? "UP" : "DOWN" );
+    line8_Status = (line8_start.y > line8_end.y ? "UP" : "DOWN" );
+    
+    println("Line2: " + line2_Status);
+    println("Line4: " + line4_Status);
+    println("Line6: " + line6_Status);
+    println("Line8: " + line8_Status);
     
     if(line2_Status == "UP" || line4_Status == "UP" || line6_Status == "UP" || line8_Status == "UP") {
       if(playerBoundaries[2] > line2_start.x){
@@ -43,7 +48,6 @@ class Collision {
       }
     } // End if(line is going down)
     
-    // true should be returned if the player is not hitting a wall, false otherwise.
     return hittingWall;
   }
 
