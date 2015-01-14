@@ -2,6 +2,11 @@
 
 class levelGen{
   
+  void work() {
+    draw();
+    check();
+  }
+  
   void draw() {
     stroke(255, 0, 0);
     line(line1_start.x, line1_start.y, line1_end.x, line1_end.y);

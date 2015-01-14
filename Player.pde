@@ -10,8 +10,14 @@ class Player {
   // Player class constructor
   Player() {
     isOnGround = false;
-    playerPos = new PVector(50, 300);
     velocity = new PVector();
+  }
+  
+  // This is called to call all of the functions, just used to clean up the main pde..
+  void play() {
+    input();
+    move();
+    draw();
   }
   
   // Display the stats of the player, coins and their score.
@@ -23,8 +29,9 @@ class Player {
    text("Points: " + playerScore, 70, 65); 
   } // End displayStats()
 
-  void input() {
+  void input() {   
     pCollision.checkFalling();
+    isOnGround = pCollision.isOnGround();
     
     float curSpeed = (isOnGround ? run_speed : air_run);
     float curFriction = (isOnGround ? friction : air_resist);
@@ -35,11 +42,11 @@ class Player {
     
     velocity.x *= curFriction;
     
-    if(pCollision.isOnGround()) {
-      if(holdingUp) {
-        velocity.y = -jump_power;
-      }
-    } else {
+    if(holdingUp && isOnGround) {
+      velocity.y = -jump_power;
+    }
+     
+    if(!isOnGround) {
       velocity.y += gravity;
     }
   } // End input()

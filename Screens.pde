@@ -104,6 +104,14 @@ class Screens {
     if (debugging) {
       fill(255);
       text(frameRate + "FPS", (width - 80), 30);
+      
+      pushStyle();
+      stroke(255,255,0, 50);
+      line(playerPos.x, 0.0, playerPos.x, height);
+      line(0.0, playerPos.y, width, playerPos.y);
+      text("X: " + playerPos.x, (width/2)-100, 15);
+      text("Y: " + playerPos.y, (width/2)+100, 15);
+      popStyle();
     }
 
     noStroke();

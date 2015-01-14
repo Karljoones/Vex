@@ -3,7 +3,7 @@
 class Collision {
   
   String line2_Status, line4_Status, line6_Status, line8_Status;
-  int whichLine;
+  int whichLine = 0;
   boolean isOnGround;
   
   // Check if the player is hitting any of the walls, line 2, 4 and 6. needs to check which side of the player the line is on first and then calculate with that.
@@ -41,26 +41,26 @@ class Collision {
       } else {
         hittingWall = true;
       }
-    } // End if(line is heading downwards)
+    } // End if(line is going down)
     
+    // true should be returned if the player is not hitting a wall, false otherwise.
     return hittingWall;
   }
-  
-  // Checking if the player is sitting on a platform or not.
+
   boolean isOnGround(){
-    if(playerBoundaries[5] >= line1_start.y || playerBoundaries[7] >= line1_start.y) {
+    if(playerBoundaries[5] == line1_start.y || playerBoundaries[7] == line1_start.y || playerBoundaries[5] == line1_start.y + 2 || playerBoundaries[7] == line1_start.y + 2) {
       whichLine = 1;
       isOnGround = true;
       return true;
-    } else if(playerBoundaries[5] >= line3_start.y || playerBoundaries[7] >= line3_start.y) {
+    } else if(playerBoundaries[5] == line3_start.y || playerBoundaries[7] == line3_start.y || playerBoundaries[5] == line3_start.y + 2 || playerBoundaries[7] == line3_start.y + 2) {
       whichLine = 3;
       isOnGround = true;
       return true;
-    } else if(playerBoundaries[5] >= line5_start.y || playerBoundaries[7] >= line5_start.y) {
+    } else if(playerBoundaries[5] == line5_start.y || playerBoundaries[7] == line5_start.y || playerBoundaries[5] == line5_start.y + 2 || playerBoundaries[7] == line5_start.y + 2) {
       whichLine = 5;
       isOnGround = true;
       return true;
-    } else if(playerBoundaries[5] >= line7_start.y || playerBoundaries[7] >= line7_start.y) {
+    } else if(playerBoundaries[5] == line7_start.y || playerBoundaries[7] == line7_start.y || playerBoundaries[5] == line7_start.y + 2 || playerBoundaries[7] == line7_start.y + 2) {
       whichLine = 7;
       isOnGround = true;
       return true;
@@ -74,21 +74,29 @@ class Collision {
     if(!isOnGround()) {
       velocity.y = 0.0;
       if(whichLine == 1) {
-        playerPos.y = line1_start.y;
+        playerPos.y = line1_start.y - (playerSize-20);
+        isOnGround = true;
+        velocity.y = 0.0;
       } else if (whichLine == 3) {
-        playerPos.y = line3_start.y;
+        playerPos.y = line3_start.y - (playerSize-20);
+        isOnGround = true;
+        velocity.y = 0.0;
       } else if (whichLine == 5) {
-        playerPos.y = line5_start.y;
+        playerPos.y = line5_start.y - (playerSize-20);
+        isOnGround = true;
+        velocity.y = 0.0;
       } else if (whichLine == 7) {
-        playerPos.y = line7_start.y;
+        playerPos.y = line7_start.y - (playerSize-20);
+        isOnGround = true;
+        velocity.y = 0.0;
+      } else {
+        isOnGround = false;
       }
-      isOnGround = true;
     } else {
       velocity.y += gravity;
     }
-  } // End checkfallign()
+  } // End checkfalling()
   
-  // Sketches out the boundaries of the player, only needs to be called once as the player itself does not move.
   void checkPlayerBoundaries() {
     // Top left corner
     playerBoundaries[0] = playerPos.x;
@@ -105,5 +113,5 @@ class Collision {
     // Bottom right corner
     playerBoundaries[6] = playerBoundaries[0] + playerSize;
     playerBoundaries[7] = playerBoundaries[1] + playerSize;
-  }
+  } // End checkPlayerBoundaries()
 }

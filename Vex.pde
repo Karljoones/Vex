@@ -13,6 +13,7 @@ levelGen generation;
 Menu collision;
 Particle ps;
 Collision pCollision;
+Enemy enemy;
 
 // Booleans for the splash screens and options
 boolean mainMenu = true, instructionsScreen = false, play = false, gameOver = false, options = false;
@@ -20,7 +21,7 @@ boolean musicOPT = false, SFXOPT = true, debugging = true;
 
 // Level
 PVector line1_start, line1_end, line2_start, line2_end, line3_start, line3_end, line4_start, line4_end, line5_start, line5_end, line6_start, line6_end, line7_start, line7_end, line8_start, line8_end;
-static final int lineMin = 400, lineMax = 2000, verticalMin = -200, verticalMax = 200, buttonWidth = 310, buttonHeight = 90;
+final int lineMin = 400, lineMax = 2000, verticalMin = -200, verticalMax = 200, buttonWidth = 310, buttonHeight = 90;
 final float gravity = 0.5;
 
 // Player related variables
@@ -56,6 +57,7 @@ void setup() {
  load = new Load();
  player = new Player();
  generation = new levelGen();
+ enemy = new Enemy();
  collision = new Menu();
  ps = new Particle();
  pCollision = new Collision();
@@ -75,6 +77,8 @@ void setup() {
  w = width + 16;
  dx = (TWO_PI / period) * spacing;
  yvalues = new float[int(w/spacing)];
+ 
+ playerPos = new PVector(40,500);
  
  // This only needs to be run once as the player does not move.
  pCollision.checkPlayerBoundaries();
@@ -101,11 +105,9 @@ void draw() {
   
   if(play) {
     screen.game();
-    player.input();
-    player.move();
-    player.draw();
-    generation.draw();
-    generation.check();
+    player.play();
+    generation.work();
+    // enemy.enemyGeneration("enemyType");
     
     println("isOnGround() = " + player.isOnGround);
     if(musicOPT) {
