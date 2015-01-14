@@ -27,7 +27,7 @@ final float gravity = 0.5;
 // Player related variables
 PVector playerPos, velocity;
 int playerScore, playerCoins, playerSize = 50;
-boolean holdingRight, holdingUp = false;
+boolean holdingRight = false;
 float[] playerBoundaries = new float[8];
 
 // Fonts
@@ -131,7 +131,7 @@ void keyPressed() {
       holdingRight = true;
     }
     if(keyCode == UP) {
-      holdingUp = true;
+      player.jump();
     }
   } // End if(play)
 } // End keyPressed()
@@ -140,9 +140,6 @@ void keyReleased() {
   if(play) {
     if(keyCode == RIGHT) {
       holdingRight = false;
-    }
-    if(keyCode == UP) {
-      holdingUp = false;
     }
     
     // return to the main menu

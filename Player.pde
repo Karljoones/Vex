@@ -5,11 +5,10 @@ class Player {
   boolean isOnGround;
   
   // Jump power and run speed can be added to by the upgrades, these are just the bases for the start of the game with no upgrades.
-  static final float jump_power = 11.0, run_speed = 5.0, air_run = 2.0, friction = 0.6, air_resist = 0.85;
+  final float jump_power = 50.0, run_speed = 5.0, air_run = 2.0, friction = 0.6, air_resist = 0.85;
   
   // Player class constructor
   Player() {
-    isOnGround = false;
     velocity = new PVector();
   }
   
@@ -31,28 +30,28 @@ class Player {
 
   void input() {   
     pCollision.checkFalling();
-    isOnGround = pCollision.isOnGround();
     
-    float curSpeed = (isOnGround ? run_speed : air_run);
-    float curFriction = (isOnGround ? friction : air_resist);
+    float curSpeed = (pCollision.isOnGround() ? run_speed : air_run);
+    float curFriction = (pCollision.isOnGround() ? friction : air_resist);
     
     if(holdingRight) {
       velocity.x += curSpeed;
     }
     
     velocity.x *= curFriction;
-    
-    if(holdingUp && isOnGround) {
-      velocity.y = -jump_power;
-    }
      
-    if(!isOnGround) {
+    if(!pCollision.isOnGround()) {
       velocity.y += gravity;
     }
   } // End input()
   
+  void jump() {
+    if(pCollision.isOnGround()) {
+      velocity.y += -jump_power;
+    }
+  }
+  
   void move() {
-    // Since the player does not move, the velocity is subtracted (so it goes the right way) from the platforms and walls.
     line1_start.sub(velocity);
     line1_end.sub(velocity);
     line2_start.sub(velocity);

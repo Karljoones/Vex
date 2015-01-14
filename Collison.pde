@@ -1,5 +1,3 @@
-// Player collision and enemy collision code goes here . . . 
-
 class Collision {
   
   String line2_Status, line4_Status, line6_Status, line8_Status;
@@ -51,50 +49,83 @@ class Collision {
     return hittingWall;
   }
 
+  // Return true if the player is on the ground. Need to test if it is within a range around the Y of the line.
   boolean isOnGround(){
-    if(playerBoundaries[5] == line1_start.y || playerBoundaries[7] == line1_start.y || playerBoundaries[5] == line1_start.y + 2 || playerBoundaries[7] == line1_start.y + 2) {
-      whichLine = 1;
-      isOnGround = true;
-      return true;
-    } else if(playerBoundaries[5] == line3_start.y || playerBoundaries[7] == line3_start.y || playerBoundaries[5] == line3_start.y + 2 || playerBoundaries[7] == line3_start.y + 2) {
-      whichLine = 3;
-      isOnGround = true;
-      return true;
-    } else if(playerBoundaries[5] == line5_start.y || playerBoundaries[7] == line5_start.y || playerBoundaries[5] == line5_start.y + 2 || playerBoundaries[7] == line5_start.y + 2) {
-      whichLine = 5;
-      isOnGround = true;
-      return true;
-    } else if(playerBoundaries[5] == line7_start.y || playerBoundaries[7] == line7_start.y || playerBoundaries[5] == line7_start.y + 2 || playerBoundaries[7] == line7_start.y + 2) {
-      whichLine = 7;
-      isOnGround = true;
-      return true;
-    } else {
-      isOnGround = false;
-      return false;
-    }
+    if(playerBoundaries[4] > line1_start.x && playerBoundaries[6] < line1_end.x) {
+      if(playerBoundaries[5] < line1_start.y + 1 || playerBoundaries[5] < line1_start.y || playerBoundaries[5] < line1_start.y - 1) {
+        if(playerBoundaries[7] < line1_start.y + 1 || playerBoundaries[7] < line1_start.y || playerBoundaries[7] < line1_start.y - 1) {
+          whichLine = 1;
+          return true;
+        }
+      }
+    } else if(playerBoundaries[4] > line1_start.x && playerBoundaries[6] < line1_end.x) {
+      if(playerBoundaries[5] < line1_start.y + 1 || playerBoundaries[5] < line1_start.y || playerBoundaries[5] < line1_start.y - 1) {
+        if(playerBoundaries[7] < line1_start.y + 1 || playerBoundaries[7] < line1_start.y || playerBoundaries[7] < line1_start.y - 1) {
+          whichLine = 1;
+          return true;
+        }
+      }
+    } else if(playerBoundaries[4] > line3_start.x && playerBoundaries[6] < line3_end.x) {
+      if(playerBoundaries[5] < line3_start.y + 1 || playerBoundaries[5] < line3_start.y || playerBoundaries[5] < line3_start.y - 1) {
+        if(playerBoundaries[7] < line3_start.y + 1 || playerBoundaries[7] < line3_start.y || playerBoundaries[7] < line3_start.y - 1) {
+          whichLine = 3;
+          return true;
+        }
+      }
+    } else if(playerBoundaries[4] > line3_start.x && playerBoundaries[6] < line3_end.x) {
+      if(playerBoundaries[5] < line3_start.y + 1 || playerBoundaries[5] < line3_start.y || playerBoundaries[5] < line3_start.y - 1) {
+        if(playerBoundaries[7] < line3_start.y + 1 || playerBoundaries[7] < line3_start.y || playerBoundaries[7] < line3_start.y - 1) {
+          whichLine = 3;
+          return true;
+        }
+      }
+    } else if(playerBoundaries[4] > line5_start.x && playerBoundaries[6] < line5_end.x) {
+      if(playerBoundaries[5] < line5_start.y + 1 || playerBoundaries[5] < line1_start.y || playerBoundaries[5] < line5_start.y - 1) {
+        if(playerBoundaries[7] < line5_start.y + 1 || playerBoundaries[7] < line1_start.y || playerBoundaries[7] < line5_start.y - 1) {
+          whichLine = 5;
+          return true;
+        }
+      }
+    } else if(playerBoundaries[4] > line5_start.x && playerBoundaries[6] < line5_end.x) {
+      if(playerBoundaries[5] < line5_start.y + 1 || playerBoundaries[5] < line5_start.y || playerBoundaries[5] < line5_start.y - 1) {
+        if(playerBoundaries[7] < line5_start.y + 1 || playerBoundaries[7] < line5_start.y || playerBoundaries[7] < line5_start.y - 1) {
+          whichLine = 5;
+          return true;
+        }
+      }
+    } else if(playerBoundaries[4] > line7_start.x && playerBoundaries[6] < line7_end.x) {
+      if(playerBoundaries[5] < line7_start.y + 1 || playerBoundaries[5] < line7_start.y || playerBoundaries[5] < line7_start.y - 1) {
+        if(playerBoundaries[7] < line7_start.y + 1 || playerBoundaries[7] < line7_start.y || playerBoundaries[7] < line7_start.y - 1) {
+          whichLine = 7;
+          return true;
+        }
+      }
+    } else if(playerBoundaries[4] > line7_start.x && playerBoundaries[6] < line7_end.x) {
+      if(playerBoundaries[5] < line7_start.y + 1 || playerBoundaries[5] < line7_start.y || playerBoundaries[5] < line7_start.y - 1) {
+        if(playerBoundaries[7] < line7_start.y + 1 || playerBoundaries[7] < line7_start.y || playerBoundaries[7] < line7_start.y - 1) {
+          whichLine = 7;
+          return true;
+        }
+      }
+    } 
+    return false;
   } // End isOnGround()
   
   void checkFalling(){
-    if(!isOnGround()) {
+    if(isOnGround()) {
       velocity.y = 0.0;
       if(whichLine == 1) {
         playerPos.y = line1_start.y - (playerSize-20);
-        isOnGround = true;
         velocity.y = 0.0;
       } else if (whichLine == 3) {
         playerPos.y = line3_start.y - (playerSize-20);
-        isOnGround = true;
         velocity.y = 0.0;
       } else if (whichLine == 5) {
         playerPos.y = line5_start.y - (playerSize-20);
-        isOnGround = true;
         velocity.y = 0.0;
       } else if (whichLine == 7) {
         playerPos.y = line7_start.y - (playerSize-20);
-        isOnGround = true;
         velocity.y = 0.0;
-      } else {
-        isOnGround = false;
       }
     } else {
       velocity.y += gravity;
