@@ -5,7 +5,7 @@ class Player {
   boolean isOnGround;
   
   // Jump power and run speed can be added to by the upgrades, these are just the bases for the start of the game with no upgrades.
-  final float jump_power = 50.0, run_speed = 5.0, air_run = 2.0, friction = 0.6, air_resist = 0.85;
+  final float jump_power = verticalMax + playerSize, run_speed = 5.0, air_run = 2.0, friction = 0.6, air_resist = 0.85;
   
   // Player class constructor
   Player() {
@@ -29,8 +29,6 @@ class Player {
   } // End displayStats()
 
   void input() {   
-    pCollision.checkFalling();
-    
     float curSpeed = (pCollision.isOnGround() ? run_speed : air_run);
     float curFriction = (pCollision.isOnGround() ? friction : air_resist);
     
@@ -52,39 +50,33 @@ class Player {
   }
   
   void move() {
-    line1_start.sub(velocity);
-    line1_end.sub(velocity);
-    line2_start.sub(velocity);
-    line2_end.sub(velocity);
-    line3_start.sub(velocity);
-    line3_end.sub(velocity);
-    line4_start.sub(velocity);
-    line4_end.sub(velocity);
-    line5_start.sub(velocity);
-    line5_end.sub(velocity);
-    line6_start.sub(velocity);
-    line6_end.sub(velocity);
-    line7_start.sub(velocity);
-    line7_end.sub(velocity);
-    line8_start.sub(velocity);
-    line8_end.sub(velocity);
-    
-    pCollision.playerWalls();
+    if(pCollision.playerWalls() == false) {
+      line1_start.sub(velocity);
+      line1_end.sub(velocity);
+      line2_start.sub(velocity);
+      line2_end.sub(velocity);
+      line3_start.sub(velocity);
+      line3_end.sub(velocity);
+      line4_start.sub(velocity);
+      line4_end.sub(velocity);
+      line5_start.sub(velocity);
+      line5_end.sub(velocity);
+      line6_start.sub(velocity);
+      line6_end.sub(velocity);
+      line7_start.sub(velocity);
+      line7_end.sub(velocity);
+      line8_start.sub(velocity);
+      line8_end.sub(velocity);
+    }
   }
   
   // Drawing the player, more avatars are to be added in the future, this gives the code room for expansion by simply adding the code, 
   void draw() {
     if(avatar1) {
-      
-      stroke(255);
+      stroke(0,255,0);
       noFill();
       rect(playerPos.x, playerPos.y, playerSize, playerSize);
     }
-    
-    // To add another
-    // if(avatarN) {
-      
-    // }
     
   } // End draw()
 } // End class
