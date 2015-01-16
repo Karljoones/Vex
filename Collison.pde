@@ -1,7 +1,6 @@
 class Collision {
   
   String line2_Status, line4_Status, line6_Status, line8_Status;
-  boolean isOnGround;
   
   boolean playerWalls() {
     boolean hittingWall = false;
@@ -126,4 +125,8 @@ class Collision {
     playerBoundaries[6] = playerBoundaries[0] + playerSize;
     playerBoundaries[7] = playerBoundaries[1] + playerSize;
   } // End checkPlayerBoundaries()
+  
+  void enemyCollision() {
+    // Enemy collision with the player needs to go here.
+  }
 }

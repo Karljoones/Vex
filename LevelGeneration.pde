@@ -32,10 +32,10 @@ class levelGen{
       line2_start.set(line1_end.x, line1_end.y);
       line2_end.set(line2_start.x, line2_start.y + random(verticalMin, verticalMax));
       while(line2_end.y > height){
-        line2_end.y = -random(verticalMin, verticalMax);
+        line2_end.y = -random(verticalMax);
       }
       while(line2_end.y < 0) {
-        line2_end.y = random(verticalMin, verticalMax);
+        line2_end.y = random(verticalMax);
       }
     }
     
@@ -50,10 +50,10 @@ class levelGen{
       line4_start.set(line3_end.x, line3_end.y);
       line4_end.set(line4_start.x, line4_start.y + random(verticalMin, verticalMax));
       while(line4_end.y > height){
-        line4_end.y = -random(verticalMin, verticalMax);
+        line4_end.y = -random(verticalMax);
       } 
       while(line4_end.y < 0) {
-        line4_end.y = random(verticalMin, verticalMax);
+        line4_end.y = random(verticalMax);
       }
     }
     
@@ -68,10 +68,10 @@ class levelGen{
       line6_start.set(line5_end.x, line5_end.y);
       line6_end.set(line6_start.x, line6_start.y + random(verticalMin, verticalMax));
       while(line6_end.y > height){
-        line6_end.y = -random(verticalMin, verticalMax);
+        line6_end.y = -random(verticalMax);
       } 
       while(line6_end.y < 0) {
-        line6_end.y = random(verticalMin, verticalMax);
+        line6_end.y = random(verticalMax);
       }
     }
     
@@ -86,10 +86,10 @@ class levelGen{
       line8_start.set(line7_end.x, line7_end.y);
       line8_end.set(line8_start.x, line8_start.y + random(verticalMin, verticalMax));
       while(line8_end.y > height){
-        line8_end.y = -random(verticalMin, verticalMax);
+        line8_end.y = -random(verticalMax);
       } 
       while(line8_end.y < 0) {
-        line8_end.y = random(verticalMin, verticalMax);
+        line8_end.y = random(verticalMax);
       }
     }
   } // End check()

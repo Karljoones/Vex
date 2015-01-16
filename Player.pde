@@ -31,24 +31,37 @@ class Player {
   void input() {   
     float curSpeed = (pCollision.isOnGround() ? run_speed : air_run);
     float curFriction = (pCollision.isOnGround() ? friction : air_resist);
+    float curJump =  jump_power;
+    
+    if(speed1B) {
+      curSpeed *= speed1;
+    } else if (speed2B) {
+      curSpeed *= speed2;
+    } else if (speed3B) {
+      curSpeed *= speed3;
+    }
+    
+    if(jump1B) {
+      curJump = jump_power * jump1;
+    } else if(jump2B) {
+      curJump = jump_power * jump2;
+    }
     
     if(holdingRight) {
       velocity.x += curSpeed;
     }
+    if(holdingUp) {
+      velocity.y += -curJump;
+    }
     
     velocity.x *= curFriction;
-     
-    if(!pCollision.isOnGround()) {
-      velocity.y += gravity;
-    }
+    
+//    This code needs to be used for the player to fall, it does not currently work.
+//    if(!pCollision.isOnGround()) {
+//      velocity.y += gravity;
+//    }
   } // End input()
-  
-  void jump() {
-    if(pCollision.isOnGround()) {
-      velocity.y += -jump_power;
-    }
-  }
-  
+
   void move() {
     if(pCollision.playerWalls() == false) {
       line1_start.sub(velocity);

@@ -1,4 +1,5 @@
 class Screens {
+  final int powerUpWindowsAmt = 3;
   
   // Main menu screen
   void mainMenu() {
@@ -101,16 +102,34 @@ class Screens {
       renderWave();
     }
     
+    // Shows in game when the player uses the P key, shows the available power ups to the player, these upgrades do not stack.
+    if(powerUpScreen) {
+      int windowWidthL = width - 200, windowHeightL = height - 200;
+      int windowWidthS = width - 400, windowHeightS = height - 400;
+      int buffer = 20;
+  
+      rectMode(CENTER);
+      noStroke();
+      fill(255, 100);
+      rect(width / 2, height / 2, windowWidthL, windowHeightL, 50);
+      pushStyle();
+        noStroke();
+        fill(0, 100);
+        // Speed height
+        rect(width / 2 + windowWidthS, height / 2, windowWidthS, windowHeightS, 50);
+       popStyle();
+    }
+    
     if (debugging) {
       fill(255);
       text(frameRate + "FPS", (width - 80), 30);
       
       pushStyle();
-      stroke(255,255,0, 50);
-      line(playerPos.x, 0.0, playerPos.x, height);
-      line(0.0, playerPos.y, width, playerPos.y);
-      text("X: " + playerPos.x, (width/2)-100, 15);
-      text("Y: " + playerPos.y, (width/2)+100, 15);
+        stroke(255,255,0, 50);
+        line(playerPos.x, 0.0, playerPos.x, height);
+        line(0.0, playerPos.y, width, playerPos.y);
+        text("X: " + playerPos.x, (width/2)-100, 15);
+        text("Y: " + playerPos.y, (width/2)+100, 15);
       popStyle();
     }
 

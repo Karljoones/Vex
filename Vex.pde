@@ -16,7 +16,7 @@ Collision pCollision;
 Enemy enemy;
 
 // Booleans for the splash screens and options
-boolean mainMenu = true, instructionsScreen = false, play = false, gameOver = false, options = false;
+boolean mainMenu = true, instructionsScreen = false, play = false, gameOver = false, options = false, powerUpScreen = false;
 boolean musicOPT = false, SFXOPT = true, debugging = true;
 
 // Level
@@ -27,8 +27,14 @@ final float gravity = 0.5;
 // Player related variables
 PVector playerPos, velocity;
 int playerScore, playerCoins, playerSize = 50;
-boolean holdingRight = false;
+boolean holdingRight, holdingUp = false;
 float[] playerBoundaries = new float[8];
+
+// PLayer upgrades to be unlocke
+boolean speed1B = false, speed2B = false, speed3B = false;
+final float speed1 = 1.2, speed2 = 1.4, speed3 = 1.6;
+boolean jump1B = false, jump2B = false;
+final float jump1 = 1.2, jump2 = 1.3;
 
 // Fonts
 PFont mainMenuFont, playerStatsDisplay, instructions;
@@ -50,7 +56,7 @@ float[] yvalues;
 void setup() {
  size(displayWidth, displayHeight);
  frame.setResizable(true); 
- frameRate(180);
+ frameRate(60);
  
  // Initialise classes
  screen = new Screens();
@@ -78,7 +84,7 @@ void setup() {
  dx = (TWO_PI / period) * spacing;
  yvalues = new float[int(w/spacing)];
  
- playerPos = new PVector(40,500);
+ playerPos = new PVector(40, 600);
  
  // This only needs to be run once as the player does not move.
  pCollision.checkPlayerBoundaries();
@@ -109,7 +115,7 @@ void draw() {
     generation.work();
     // enemy.enemyGeneration("enemyType");
     
-    println("isOnGround() = " + player.isOnGround);
+    println("isOnGround() = " + pCollision.isOnGround());
     if(musicOPT) {
       if(!themeSong.isLooping()) {
         themeSong.loop();
@@ -125,13 +131,17 @@ void draw() {
 } // End draw
 
 void keyPressed() {
-  // Keys pressed during game play.
   if(play){
     if(keyCode == RIGHT) {
       holdingRight = true;
     }
     if(keyCode == UP) {
-      player.jump();
+      if(pCollision.isOnGround()){
+        holdingUp = true;
+      }
+    }
+    if(key == 'p' || key == 'P') {
+      powerUpScreen = !powerUpScreen;
     }
   } // End if(play)
 } // End keyPressed()
@@ -141,8 +151,9 @@ void keyReleased() {
     if(keyCode == RIGHT) {
       holdingRight = false;
     }
-    
-    // return to the main menu
+    if(keyCode == UP) {
+      holdingUp = false;
+    }
     if(key == 'm' || key == 'M'){
       mainMenu = true;
       play = false;
