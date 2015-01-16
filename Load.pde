@@ -9,7 +9,7 @@ class Load {
   
   // Load the images into the game
   void loadImages() {
-    logo = loadImage("VexLogo.png");
+    // Trying to have as little images loaded in as possible.
   }
   
   // Initialise player stats

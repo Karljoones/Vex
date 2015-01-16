@@ -6,8 +6,12 @@ class Screens {
     clear();
     background(0);
     
-    imageMode(CENTER);
-    image(logo, width / 2, 100, 300, 150);
+    pushStyle();
+      fill(255,0,0);
+      textMode(CENTER);
+      textFont(mainMenuFont, 70);
+      text("VEX", width / 2, 100);
+    popStyle();
 
     cursor(CROSS);
 
@@ -24,7 +28,6 @@ class Screens {
       renderWave();
     }
 
-    // Main menu buttons
     stroke(255);
     fill(206, 245, 247);
     textAlign(CENTER);
@@ -105,7 +108,7 @@ class Screens {
     // Shows in game when the player uses the P key, shows the available power ups to the player, these upgrades do not stack.
     if(powerUpScreen) {
       int windowWidthL = width - 200, windowHeightL = height - 200;
-      int windowWidthS = width - 400, windowHeightS = height - 400;
+      int windowWidthS = windowWidthL / 4, windowHeightS = windowHeightL - 200;
       int buffer = 20;
   
       rectMode(CENTER);
@@ -114,9 +117,11 @@ class Screens {
       rect(width / 2, height / 2, windowWidthL, windowHeightL, 50);
       pushStyle();
         noStroke();
-        fill(0, 100);
+        fill(0, 200);
         // Speed height
-        rect(width / 2 + windowWidthS, height / 2, windowWidthS, windowHeightS, 50);
+        rect(width / 2 + windowWidthS + 40, height / 2, windowWidthS, windowHeightS, 50);
+        rect(width / 2, height / 2, windowWidthS, windowHeightS, 50);
+        rect(width / 2 - windowWidthS - 40, height / 2, windowWidthS, windowHeightS, 50);
        popStyle();
     }
     
@@ -142,7 +147,14 @@ class Screens {
   void options() {
     clear();
     background(0);
-
+    
+    pushStyle();
+      fill(255,0,0);
+      textMode(CENTER);
+      textFont(mainMenuFont, 70);
+      text("VEX", width / 2, 100);
+    popStyle();
+    
     // Waveform
     if(musicOPT) {
       stroke(255, 30);

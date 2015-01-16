@@ -17,7 +17,7 @@ Enemy enemy;
 
 // Booleans for the splash screens and options
 boolean mainMenu = true, instructionsScreen = false, play = false, gameOver = false, options = false, powerUpScreen = false;
-boolean musicOPT = false, SFXOPT = true, debugging = true;
+boolean musicOPT = false, SFXOPT = true, debugging = false;
 
 // Level
 PVector line1_start, line1_end, line2_start, line2_end, line3_start, line3_end, line4_start, line4_end, line5_start, line5_end, line6_start, line6_end, line7_start, line7_end, line8_start, line8_end;
@@ -30,7 +30,7 @@ int playerScore, playerCoins, playerSize = 50;
 boolean holdingRight, holdingUp = false;
 float[] playerBoundaries = new float[8];
 
-// PLayer upgrades to be unlocke
+// Player upgrades to be unlocked
 boolean speed1B = false, speed2B = false, speed3B = false;
 final float speed1 = 1.2, speed2 = 1.4, speed3 = 1.6;
 boolean jump1B = false, jump2B = false;

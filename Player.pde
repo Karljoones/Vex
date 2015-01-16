@@ -35,24 +35,30 @@ class Player {
     
     if(speed1B) {
       curSpeed *= speed1;
+      println("Current speed is: " + curSpeed + "with a multiplier of: " + speed1);
     } else if (speed2B) {
       curSpeed *= speed2;
+      println("Current speed is: " + curSpeed + "with a multiplier of: " + speed2);
     } else if (speed3B) {
       curSpeed *= speed3;
+      println("Current speed is: " + curSpeed + "with a multiplier of: " + speed3);
     }
+    
     
     if(jump1B) {
       curJump = jump_power * jump1;
+      println("Current jump height is: " + curJump + "with a multiplier of: " + jump1);
     } else if(jump2B) {
       curJump = jump_power * jump2;
+      println("Current jump height is: " + curJump + "with a multiplier of: " + jump2);
     }
     
     if(holdingRight) {
       velocity.x += curSpeed;
     }
-    if(holdingUp) {
-      velocity.y += -curJump;
-    }
+//    if(holdingUp) {
+//      velocity.y += -curJump;
+//    }
     
     velocity.x *= curFriction;
     
