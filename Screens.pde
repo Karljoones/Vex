@@ -106,7 +106,7 @@ class Screens {
     }
     
     // Shows in game when the player uses the P key, shows the available power ups to the player, these upgrades do not stack.
-    if(powerUpScreen) {
+    if(powerUpScreen || characterSelection) {
       rectMode(CENTER);
       noStroke();
       fill(255, 100);
@@ -115,7 +115,7 @@ class Screens {
       // Upgrade window
       pushStyle();
         noStroke();
-        fill(0, 200);
+        fill(0, 220);
         textFont(upgradeWindowFont, 22);
         textMode(CENTER);
     
@@ -124,25 +124,82 @@ class Screens {
         rect(halfWidth - windowWidthS - 40, halfHeight, windowWidthS, windowHeightS, 50);
        popStyle();
        
-        if(speed1B) {
-          text("Speed Boost\n\n Current Level: 1 / 3\nCost: " + speed2Cost + "\nMultiplier: " + speed1, ((halfWidth + windowWidthS) / 2) - (windowWidthS / 2), halfHeight - 50);
-        } else if(speed2B) {
-          text("Speed Boost\n\n Current Level: 2 / 3\nCost: " + speed3Cost + "\nMultiplier: " + speed2, ((halfWidth + windowWidthS) / 2) - (windowWidthS / 2), halfHeight - 50);
-        } else if(speed3B) {
-          text("Speed Boost\n\n Current Level: MAX!!\nMultiplier: " + speed3, ((halfWidth + windowWidthS) / 2) - (windowWidthS / 2), halfHeight - 50);
-        } else {
-          text("Speed Boost\n\n Current Level: 0 / 3\nCost: " + speed1Cost, ((halfWidth + windowWidthS) / 2) - (windowWidthS / 2), halfHeight - 50);
-        } // End speed upgrades
-        
-        if(jump1B) {
-          text("Jump Boost\n\n Current Level: 1 / 2\nCost: " + jump2Cost + "\nMultiplier: " + jump1, halfWidth, halfHeight - 50);
-        } else if(jump2B) {
-          text("Jump Boost\n\n Current Level: MAX!!\nMultiplier: " + jump2, halfWidth, halfHeight - 50);
-        } else {
-          text("Jump Boost\n\n Current Level: 0 / 2\nCost: " + jump1Cost, halfWidth, halfHeight - 50);
-        } // End jump upgrades
-        
-        text("Weapons upgrades\n\nTo be\n added later", (halfWidth + windowWidthS) + 40, halfHeight - 50);
+       if(powerUpScreen) {
+          if(speed1B) {
+            text("Speed Upgrade\n\n Current Level: 1 / 3\nCost: " + speed2Cost + "\nMultiplier: " + speed1, ((halfWidth + windowWidthS) / 2) - (windowWidthS / 2), halfHeight - 50);
+          } else if(speed2B) {
+            text("Speed Upgrade\n\n Current Level: 2 / 3\nCost: " + speed3Cost + "\nMultiplier: " + speed2, ((halfWidth + windowWidthS) / 2) - (windowWidthS / 2), halfHeight - 50);
+          } else if(speed3B) {
+            text("Speed Upgrade\n\n Current Level: MAX!!\nMultiplier: " + speed3, ((halfWidth + windowWidthS) / 2) - (windowWidthS / 2), halfHeight - 50);
+          } else {
+            text("Speed Upgrade\n\n Current Level: 0 / 3\nCost: " + speed1Cost, ((halfWidth + windowWidthS) / 2) - (windowWidthS / 2), halfHeight - 50);
+          } // End speed upgrades
+          
+          if(jump1B) {
+            text("Jump Upgrade\n\n Current Level: 1 / 2\nCost: " + jump2Cost + "\nMultiplier: " + jump1, halfWidth, halfHeight - 50);
+          } else if(jump2B) {
+            text("Jump Upgrade\n\n Current Level: MAX!!\nMultiplier: " + jump2, halfWidth, halfHeight - 50);
+          } else {
+            text("Jump Upgrade\n\n Current Level: 0 / 2\nCost: " + jump1Cost, halfWidth, halfHeight - 50);
+          } // End jump upgrades
+          
+          text("Weapons Upgrade\n\n Coming soon..", (halfWidth + windowWidthS) + 40, halfHeight - 50);
+       } // End if(powerUpScreen)
+       
+       if(characterSelection) {
+         // Bill ( avatar 1 )
+         pushStyle();
+           rectMode(CENTER);
+           stroke(0,255,0);
+           noFill();
+           rect((halfWidth + windowWidthS) / 2 - (windowWidthS / 2), halfHeight - 100, playerSize, playerSize);
+         popStyle();
+         if(avatar1) {
+           text("Bill\n\nSelected!", (halfWidth + windowWidthS) / 2 - (windowWidthS / 2), halfHeight);
+         } else {
+           text("Bill", (halfWidth + windowWidthS) / 2 - (windowWidthS / 2), halfHeight);
+         }
+         
+         // Sammie ( avatar 2 )
+         pushStyle();
+            stroke(255,0,0);
+            fill(255, 0, 0, 150);
+            rect(halfWidth, halfHeight - 100, playerSize + 15, playerSize + 15);
+            triangle(halfWidth, halfHeight - 100, halfWidth - 50, halfHeight - 140, halfWidth + 50, halfHeight - 140);           
+         popStyle();
+         if(avatar2){
+           text("Sammie\n\nSelected!", halfWidth, halfHeight);
+         } else {
+           if(avatar2Unlocked) {
+             text("Sammie", halfWidth, halfHeight);
+           } else {
+             text("Sammie\n\nUnlock cost: " + avatar2Cost, halfWidth, halfHeight);
+           }
+         } // End sammie
+         
+         // Terry ( avatar 3 )
+         pushStyle();
+          stroke(255);
+          fill(255);
+          rect(halfWidth + windowWidthS + 40, halfHeight - 100, playerSize, playerSize);
+          ellipse(halfWidth + windowWidthS + (playerSize / 2) - 5, halfHeight - 100, playerSize, playerSize);
+          ellipse(halfWidth + windowWidthS + (playerSize / 2) + 15, (halfHeight - 100) - (playerSize / 2), playerSize, playerSize);
+          fill(0);
+          noStroke();
+          ellipse(halfWidth + windowWidthS + 50, halfHeight - 105, 12, 12);
+          ellipse(halfWidth + windowWidthS + 30, halfHeight - 105, 12, 12);
+         popStyle();
+         if(avatar3){
+           text("Terry\n\nSelected!", (halfWidth + windowWidthS) + 40, halfHeight);
+         } else {
+           if(avatar3Unlocked){
+             text("Terry", (halfWidth + windowWidthS) + 40, halfHeight);
+           } else {
+             text("Terry\n\nUnlock cost: " + avatar3Cost, (halfWidth + windowWidthS) + 40, halfHeight);
+           }
+         } // End terry
+         
+       }
     } // End power up screen.
     
     if (debugging) {

@@ -16,6 +16,7 @@ class Load {
     playerScore = 0;
     velocity.x = 0;
     velocity.y = 0;
+    jump1B = jump2B = speed1B = speed2B = speed3B = false;
   }
   
   void loadVectors() {

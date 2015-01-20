@@ -1,5 +1,4 @@
 class Player {
-  boolean avatar1 = true;
   boolean isOnGround;
   
   // These are the base numbers, can be upgraded by user points
@@ -26,7 +25,9 @@ class Player {
   // This method keeps track of the players score and adds to it when it is necessary to do so
   void score() {
     if(holdingRight) {
-      playerScore++;
+      if(playerScore < 1000000) {
+        playerScore++;
+      }
     }
   }
   
@@ -34,12 +35,12 @@ class Player {
    textFont(playerStatsDisplay, 30);
    textAlign(CENTER);
    stroke(255);
-   text("Coins : " + playerCoins, 70, 30);
-   text("Points: " + playerScore, 70, 65); 
+   text("Coins : " + playerCoins, 100, 30); // Coins system not yet implemented
+   text("Points: " + playerScore, 100, 65); 
   } // End displayStats()
 
   void input() {   
-    curSpeed = (pCollision.isOnGround() ? run_speed : air_run);
+    float curSpeed = (pCollision.isOnGround() ? run_speed : air_run);
     float curFriction = (pCollision.isOnGround() ? friction : air_resist);
     float curJump =  jump_power;
     
@@ -121,13 +122,26 @@ class Player {
     }
   }
   
-  // Drawing the player, more avatars are to be added in the future, this gives the code room for expansion by simply adding the code, 
   void draw() {
     if(avatar1) {
       stroke(0,255,0);
       noFill();
       rect(playerPos.x, playerPos.y, playerSize, playerSize);
+    } else if(avatar2){
+      stroke(255,0,0);
+      fill(255, 0, 0, 150);
+      rect(playerPos.x, playerPos.y, playerSize + 15, playerSize + 15);
+      triangle(playerPos.x, playerPos.y, playerPos.x - 50, playerPos.y - 40, playerPos.x + 50, playerPos.y - 40);
+    } else if(avatar3){
+      stroke(255);
+      fill(255);
+      rect(playerPos.x, playerPos.y, playerSize, playerSize);
+      ellipse(playerPos.x, playerPos.y - (playerSize / 2), playerSize, playerSize);
+      ellipse(playerPos.x - (playerSize / 2), playerPos.y, playerSize, playerSize);
+      fill(0);
+      noStroke();
+      ellipse(playerPos.x - 10, playerPos.y - 5, 12, 12);
+      ellipse(playerPos.x + 10, playerPos.y - 5, 12, 12);
     }
-    
   } // End draw()
 } // End class

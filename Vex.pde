@@ -14,29 +14,29 @@ Menu collision;
 Collision pCollision;
 Enemy enemy;
 
-// Booleans for the splash screens and options
-boolean mainMenu = true, instructionsScreen = false, play = false, gameOver = false, options = false, powerUpScreen = false;
+boolean mainMenu = true, instructionsScreen = false, play = false, gameOver = false, options = false, powerUpScreen = false, characterSelection = false;
 boolean musicOPT = false, SFXOPT = true, debugging = true;
 
-// Level variables
+// Level variables and menu variables
 PVector line1_start, line1_end, line2_start, line2_end, line3_start, line3_end, line4_start, line4_end, line5_start, line5_end, line6_start, line6_end, line7_start, line7_end, line8_start, line8_end;
 final int lineMin = 400, lineMax = 2000, verticalMin = -200, verticalMax = 200, buttonWidth = 310, buttonHeight = 90;
 final float gravity = 0.5;
 
 // Player related variables
 PVector playerPos, velocity;
-int playerScore = 0, playerCoins, playerSize = 50;
+int playerScore = 1000, playerCoins, playerSize = 50;
 boolean holdingRight, holdingUp = false;
 float[] playerBoundaries = new float[8];
-float curSpeed;
 
+// Avatar variables
+boolean avatar1 = true, avatar2 = false, avatar3 = false; // Only one can be true at any one time
+boolean avatar1Unlocked = true, avatar2Unlocked = false, avatar3Unlocked = false; // Avatar 1 is always unlocked
+final int avatar2Cost = 1000, avatar3Cost = 1250; 
 
 // Player upgrades to be unlocked by the player.
-boolean speed1B = false, speed2B = true, speed3B = false;
-final float speed1 = 1.2, speed2 = 1.4, speed3 = 1.6;
-boolean jump1B = false, jump2B = false;
-final float jump1 = 1.2, jump2 = 1.3;
-final int speed1Cost = 4000, speed2Cost = 5500, speed3Cost = 10000, jump1Cost = 5000, jump2Cost = 10000; // Costs need to be added when points system is added to the game.
+boolean speed1B = false, speed2B = false, speed3B = false, jump1B = false, jump2B = false;
+final float speed1 = 1.2, speed2 = 1.4, speed3 = 1.6, jump1 = 1.2, jump2 = 1.3;
+final int speed1Cost = 1000, speed2Cost = 1500, speed3Cost = 2500, jump1Cost = 1000, jump2Cost = 1500; // Costs may need to be balanced out in the game.
 
 // Fonts
 PFont mainMenuFont, playerStatsDisplay, instructions, upgradeWindowFont;
@@ -120,6 +120,7 @@ void draw() {
     screen.game();
     player.play();
     generation.work();
+    collision.play();
     // enemy.enemyGeneration("enemyType");
     
     println("isOnGround() = " + pCollision.isOnGround());
@@ -149,6 +150,11 @@ void keyPressed() {
     }
     if(key == 'p' || key == 'P') {
       powerUpScreen = !powerUpScreen;
+      characterSelection = false;
+    }
+    if(key == 'c' || key == 'C') {
+      characterSelection = !characterSelection;
+      powerUpScreen = false;
     }
   } // End if(play)
 } // End keyPressed()

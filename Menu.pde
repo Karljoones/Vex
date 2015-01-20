@@ -10,6 +10,7 @@ class Menu {
           mainMenu = false;
           play = true;
           load.loadVectors();
+          load.initialiseGame();
           
           noCursor();
           
@@ -130,18 +131,53 @@ class Menu {
  
  void play() {
    if(powerUpScreen) {
-     
-     // Middle button
-     if(mouseX > (width / 2) - (windowWidthS / 2) && mouseY > (height / 2) - (windowHeightS / 2)) { // Top left hand corner
-       if(mouseX < (width / 2) + (windowWidthS / 2) && mouseY > (height / 2) - (windowHeightS / 2)) { // Top right hand corner
-         if(mouseX > (width / 2) - (windowWidthS / 2) && mouseY < (height / 2) + (windowHeightS / 2)) {  // Bottom left hand corner
-           if(mouseX < (width / 2) + (windowWidthS / 2) && mouseY < (height / 2) + (windowHeightS / 2)) {
-              // Code for changing the jump boost need to go here.
+     if(mousePressed) {
+       // Middle button - jump upgrade button
+       if(mouseX > (halfWidth - (windowWidthS / 2)) && mouseX < (halfWidth + (windowWidthS / 2))) {
+         if(mouseY > (halfHeight - (windowHeightS / 2)) && mouseY < (halfHeight + (windowHeightS / 2))) {
+           
+           if(!jump1B && !jump2B) {
+             if(playerScore > jump1Cost) {
+               jump1B = true;
+               playerScore -= jump1Cost;
+             }
+           }
+           if(jump1B) {
+             if(playerScore >= jump2Cost) {
+               jump2B = true;
+               jump1B = false;
+               playerScore -= jump2Cost;
+             }
            }
          }
-       }
-     }
-   }
- }
+       } // End of middle button
+       
+       if(characterSelection) {
+         // Middle button - Sammie
+         if(mouseX > (halfWidth - (windowWidthS / 2)) && mouseX < (halfWidth + (windowWidthS / 2))) {
+           if(mouseY > (halfHeight - (windowHeightS / 2)) && mouseY < (halfHeight + (windowHeightS / 2))) {
+             if(avatar2Unlocked){
+               avatar1 = false;
+               avatar2 = true;
+               avatar3 = false;
+             } else {
+               if(playerScore >= avatar2Cost) {
+                 playerScore -= avatar2Cost;
+                 avatar2Unlocked = true;
+                 avatar1 = false;
+                 avatar2 = true;
+                 avatar3 = false;
+               }
+             }
+           }
+         } // End of middle button
+         
+       } // End if(characterSelection)
+     } // End if(mousePressed)
+     
+   } // End if(powerUpScreen)
+   
+ } // End play()
+ 
 } // End class
   

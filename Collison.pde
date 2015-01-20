@@ -109,21 +109,41 @@ class Collision {
   } // End isOnGround()
   
   void checkPlayerBoundaries() {
-    // Top left corner
-    playerBoundaries[0] = playerPos.x;
-    playerBoundaries[1] = playerPos.y;
+    if(avatar1) {
+      // Top left corner
+      playerBoundaries[0] = playerPos.x;
+      playerBoundaries[1] = playerPos.y;
+      
+      // Top right corner
+      playerBoundaries[2] = playerBoundaries[0] + playerSize;
+      playerBoundaries[3] = playerBoundaries[1];
+      
+      // Bottom left corner
+      playerBoundaries[4] = playerBoundaries[0];
+      playerBoundaries[5] = playerBoundaries[1] + playerSize;
+      
+      // Bottom right corner
+      playerBoundaries[6] = playerBoundaries[0] + playerSize;
+      playerBoundaries[7] = playerBoundaries[1] + playerSize;
+    }
     
-    // Top right corner
-    playerBoundaries[2] = playerBoundaries[0] + playerSize;
-    playerBoundaries[3] = playerBoundaries[1];
-    
-    // Bottom left corner
-    playerBoundaries[4] = playerBoundaries[0];
-    playerBoundaries[5] = playerBoundaries[1] + playerSize;
-    
-    // Bottom right corner
-    playerBoundaries[6] = playerBoundaries[0] + playerSize;
-    playerBoundaries[7] = playerBoundaries[1] + playerSize;
+    if(avatar2) {
+      // Top left corner
+      playerBoundaries[0] = playerPos.x;
+      playerBoundaries[1] = playerPos.y;
+      
+      // Top right corner
+      playerBoundaries[2] = playerBoundaries[0] + playerSize + 15;
+      playerBoundaries[3] = playerBoundaries[1];
+      
+      // Bottom left corner
+      playerBoundaries[4] = playerBoundaries[0];
+      playerBoundaries[5] = playerBoundaries[1] + playerSize + 15;
+      
+      // Bottom right corner
+      playerBoundaries[6] = playerBoundaries[0] + playerSize + 15;
+      playerBoundaries[7] = playerBoundaries[1] + playerSize + 15;
+    }
   } // End checkPlayerBoundaries()
   
   void enemyCollision() {
