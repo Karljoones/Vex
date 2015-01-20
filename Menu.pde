@@ -130,37 +130,81 @@ class Menu {
  } // End options menu
  
  void play() {
-   if(powerUpScreen) {
+   if(powerUpScreen || characterSelection) {
      if(mousePressed) {
-       // Middle button - jump upgrade button
-       if(mouseX > (halfWidth - (windowWidthS / 2)) && mouseX < (halfWidth + (windowWidthS / 2))) {
-         if(mouseY > (halfHeight - (windowHeightS / 2)) && mouseY < (halfHeight + (windowHeightS / 2))) {
-           
-           if(!jump1B && !jump2B) {
-             if(playerScore > jump1Cost) {
-               jump1B = true;
-               playerScore -= jump1Cost;
+       if(powerUpScreen){
+         // Right button - speed upgrade button
+         if(mouseX > halfWidth - windowWidthS - 40 - (windowWidthS / 2) && mouseX < halfWidth - windowWidthS - 40 + (windowWidthS / 2)) {
+           if(mouseY > (halfHeight - (windowHeightS / 2)) && mouseY < (halfHeight + (windowHeightS / 2))) {
+             if(!speed1B && !speed2B && !speed3B) {
+              if(playerScore >= speed1Cost) {
+                speed1B = true;
+                playerScore -= speed1Cost;
+              } 
              }
-           }
-           if(jump1B) {
-             if(playerScore >= jump2Cost) {
-               jump2B = true;
-               jump1B = false;
-               playerScore -= jump2Cost;
-             }
+            if(speed1B) {
+              if(playerScore >= speed2Cost) {
+                speed1B = false;
+                speed2B = true;
+              }
+            }
+            if(speed2B) {
+              if(playerScore >= speed3Cost) {
+                speed1B = false;
+                speed2B = false;
+                speed3B = true;
+              }
+            }
            }
          }
-       } // End of middle button
+         
+         // Middle button - jump upgrade button
+         if(mouseX > (halfWidth - (windowWidthS / 2)) && mouseX < (halfWidth + (windowWidthS / 2))) {
+           if(mouseY > (halfHeight - (windowHeightS / 2)) && mouseY < (halfHeight + (windowHeightS / 2))) {
+             
+             if(!jump1B && !jump2B) {
+               if(playerScore >= jump1Cost) {
+                 jump1B = true;
+                 playerScore -= jump1Cost;
+               }
+             }
+             if(jump1B) {
+               if(playerScore >= jump2Cost) {
+                 jump2B = true;
+                 jump1B = false;
+                 playerScore -= jump2Cost;
+               }
+             }
+           }
+         } // End of middle button
+         
+         // Left button - weapons / health upgrade button
+         if(mouseX > halfWidth + windowWidthS + 40 && mouseX < halfWidth + windowWidthS + 40 + (windowWidthS / 2)) {
+           if(mouseY > (halfHeight - (windowHeightS / 2)) && mouseY < (halfHeight + (windowHeightS / 2))) {
+             
+           }
+         }
+       } // End powerupscreen
        
        if(characterSelection) {
-         // Middle button - Sammie
+         // Right button - Billy, avatar1
+         if(mouseX > halfWidth - windowWidthS - 40 - (windowWidthS / 2) && mouseX < halfWidth - windowWidthS - 40 + (windowWidthS / 2)) {
+           if(mouseY > (halfHeight - (windowHeightS / 2)) && mouseY < (halfHeight + (windowHeightS / 2))) {
+              avatar1 = true;
+              avatar2 = false;
+              avatar3 = false;
+           }
+         }
+         
+         // Middle button - Sammie, avatar2
          if(mouseX > (halfWidth - (windowWidthS / 2)) && mouseX < (halfWidth + (windowWidthS / 2))) {
            if(mouseY > (halfHeight - (windowHeightS / 2)) && mouseY < (halfHeight + (windowHeightS / 2))) {
              if(avatar2Unlocked){
                avatar1 = false;
                avatar2 = true;
                avatar3 = false;
-             } else {
+             } 
+             if(!avatar2Unlocked) {
                if(playerScore >= avatar2Cost) {
                  playerScore -= avatar2Cost;
                  avatar2Unlocked = true;
@@ -171,6 +215,26 @@ class Menu {
              }
            }
          } // End of middle button
+         
+         // Left button - Terry, avatar3
+         if(mouseX > halfWidth + windowWidthS + 40 && mouseX < halfWidth + windowWidthS + 40 + (windowWidthS / 2)) {
+           if(mouseY > (halfHeight - (windowHeightS / 2)) && mouseY < (halfHeight + (windowHeightS / 2))) {
+             if(avatar3Unlocked){
+               avatar1 = false;
+               avatar2 = false;
+               avatar3 = true;
+             }
+             if(!avatar3Unlocked) {
+               if(playerScore >= avatar3Cost) {
+                 playerScore -= avatar3Cost;
+                 avatar3Unlocked = true;
+                 avatar1 = false;
+                 avatar2 = false;
+                 avatar3 = true;
+               }
+             }
+           }
+         }
          
        } // End if(characterSelection)
      } // End if(mousePressed)

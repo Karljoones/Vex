@@ -30,7 +30,7 @@ float[] playerBoundaries = new float[8];
 
 // Avatar variables
 boolean avatar1 = true, avatar2 = false, avatar3 = false; // Only one can be true at any one time
-boolean avatar1Unlocked = true, avatar2Unlocked = false, avatar3Unlocked = false; // Avatar 1 is always unlocked
+boolean avatar1Unlocked = true, avatar2Unlocked = false, avatar3Unlocked = false; // Avatar 1 is always unlocked, the rest need to be paid for with ingame credits.
 final int avatar2Cost = 1000, avatar3Cost = 1250; 
 
 // Player upgrades to be unlocked by the player.

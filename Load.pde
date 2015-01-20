@@ -11,12 +11,13 @@ class Load {
     // Loading in the images
   }
 
+  // Make sure that everything is ready for a new game to begin.
   void initialiseGame() {
     playerCoins = 0;
     playerScore = 0;
     velocity.x = 0;
     velocity.y = 0;
-    jump1B = jump2B = speed1B = speed2B = speed3B = false;
+    jump1B = jump2B = speed1B = speed2B = speed3B = powerUpScreen = characterSelection = avatar2Unlocked = avatar3Unlocked = false;
   }
   
   void loadVectors() {

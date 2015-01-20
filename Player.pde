@@ -127,12 +127,14 @@ class Player {
       stroke(0,255,0);
       noFill();
       rect(playerPos.x, playerPos.y, playerSize, playerSize);
-    } else if(avatar2){
+    } 
+    if(avatar2){
       stroke(255,0,0);
       fill(255, 0, 0, 150);
       rect(playerPos.x, playerPos.y, playerSize + 15, playerSize + 15);
       triangle(playerPos.x, playerPos.y, playerPos.x - 50, playerPos.y - 40, playerPos.x + 50, playerPos.y - 40);
-    } else if(avatar3){
+    } 
+    if(avatar3){
       stroke(255);
       fill(255);
       rect(playerPos.x, playerPos.y, playerSize, playerSize);
