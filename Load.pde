@@ -1,18 +1,16 @@
 class Load {
   
-  // Load the fonts into the game
   void loadFonts() {
     mainMenuFont = loadFont("FlynnHollow-48.vlw");
     playerStatsDisplay = loadFont("ARDESTINE-48.vlw");
     instructions = loadFont("AgencyFB-Reg-48.vlw");
+    upgradeWindowFont = loadFont("CopperplateGothic-Bold-48.vlw");
   }
-  
-  // Load the images into the game
+
   void loadImages() {
-    // Trying to have as little images loaded in as possible.
+    // Loading in the images
   }
-  
-  // Initialise player stats
+
   void initialiseGame() {
     playerCoins = 0;
     playerScore = 0;
@@ -20,7 +18,6 @@ class Load {
     velocity.y = 0;
   }
   
-  // Initialise the vectors, what they start out as, needs to sort itself out while playing the game.
   void loadVectors() {
     
     // Horizontal
@@ -56,13 +53,11 @@ class Load {
     line8_end = new PVector(line8_start.x, line8_start.y + random(verticalMin, verticalMax));
   } // End loadVectors
   
-  // Load the music into the game
   void loadMusic() {
     mainMenuMusic = minim.loadFile("mainMenuMusic.mp3", 2048);
     themeSong = minim.loadFile("themeSong.mp3", 2048);    
   }
   
-  // Load the sounds into the game
   void loadSounds() {
     selectKey = minim.loadFile("Blip_Select.wav");
   }

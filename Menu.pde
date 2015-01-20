@@ -128,5 +128,20 @@ class Menu {
    } // End mousePressed
  } // End options menu
  
+ void play() {
+   if(powerUpScreen) {
+     
+     // Middle button
+     if(mouseX > (width / 2) - (windowWidthS / 2) && mouseY > (height / 2) - (windowHeightS / 2)) { // Top left hand corner
+       if(mouseX < (width / 2) + (windowWidthS / 2) && mouseY > (height / 2) - (windowHeightS / 2)) { // Top right hand corner
+         if(mouseX > (width / 2) - (windowWidthS / 2) && mouseY < (height / 2) + (windowHeightS / 2)) {  // Bottom left hand corner
+           if(mouseX < (width / 2) + (windowWidthS / 2) && mouseY < (height / 2) + (windowHeightS / 2)) {
+              // Code for changing the jump boost need to go here.
+           }
+         }
+       }
+     }
+   }
+ }
 } // End class
   

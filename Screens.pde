@@ -15,7 +15,7 @@ class Screens {
 
     cursor(CROSS);
 
-    // Waveform or sine wave
+    // Waveform or sine wave depending on the sound options
     if(musicOPT) {
       stroke(255, 50);
       for (int i = 0; i < mainMenuMusic.bufferSize () - 1; i++ )
@@ -107,23 +107,43 @@ class Screens {
     
     // Shows in game when the player uses the P key, shows the available power ups to the player, these upgrades do not stack.
     if(powerUpScreen) {
-      int windowWidthL = width - 200, windowHeightL = height - 200;
-      int windowWidthS = windowWidthL / 4, windowHeightS = windowHeightL - 200;
-      int buffer = 20;
-  
       rectMode(CENTER);
       noStroke();
       fill(255, 100);
       rect(width / 2, height / 2, windowWidthL, windowHeightL, 50);
+      
+      // Upgrade window
       pushStyle();
         noStroke();
         fill(0, 200);
-        // Speed height
+        textFont(upgradeWindowFont, 22);
+        textMode(CENTER);
+    
         rect(width / 2 + windowWidthS + 40, height / 2, windowWidthS, windowHeightS, 50);
         rect(width / 2, height / 2, windowWidthS, windowHeightS, 50);
         rect(width / 2 - windowWidthS - 40, height / 2, windowWidthS, windowHeightS, 50);
        popStyle();
-    }
+       
+        if(speed1B) {
+          text("Speed Boost\n\n Current Level: 1 / 3\nMultiplier: " + speed1, ((width / 2 + windowWidthS) / 2) - (windowWidthS / 2), height / 2);
+        } else if(speed2B) {
+          text("Speed Boost\n\n Current Level: 2 / 3\nMultiplier: " + speed2, ((width / 2 + windowWidthS) / 2) - (windowWidthS / 2), height / 2);
+        } else if(speed3B) {
+          text("Speed Boost\n\n Current Level: MAX!!\nMultiplier: " + speed3, ((width / 2 + windowWidthS) / 2) - (windowWidthS / 2), height / 2);
+        } else {
+          text("Speed Boost\n\n Current Level: 0 / 3", ((width / 2 + windowWidthS) / 2) - (windowWidthS / 2), height / 2);
+        } // End speed upgrades
+        
+        if(jump1B) {
+          text("Jump Boost\n\n Current Level: 1 / 2\nMultiplier: " + jump1, width / 2, height / 2);
+        } else if(jump2B) {
+          text("Jump Boost\n\n Current Level: MAX!!\nMultiplier: " + jump2, width / 2, height / 2);
+        } else {
+          text("Jump Boost\n\n Current Level: 0 / 2", width / 2, height / 2);
+        } // End jump upgrades
+        
+        text("Weapons upgrades\nTo be\n\n added later", (width / 2 + windowWidthS) + 20, height / 2);
+    } // End power up screen.
     
     if (debugging) {
       fill(255);
@@ -192,9 +212,9 @@ class Screens {
     fill(21, 231, 246);
 
     if (debugging) {
-      text("Framerate: On", (width/2), (height/2) - 130);
+      text("Debugging: On", (width/2), (height/2) - 130);
     } else {
-      text("Framerate: Off", (width/2), (height/2) - 130);
+      text("Debugging: Off", (width/2), (height/2) - 130);
     }  
 
     // Music button
@@ -282,6 +302,7 @@ class Screens {
       ellipse(x*spacing, height/2+yvalues[x], 16,16);
     } 
   }
+  // End sine wave
   
 } // End class
 

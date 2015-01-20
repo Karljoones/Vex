@@ -1,17 +1,19 @@
 class Enemy {
-  
-  // This is the finite amount of enemies that can be on the screen at any one moment.
   final int enemyCount = 5;
   String type;
   int amt, enemyDelay;
   
-  // Spawn rates of the enemies. Will need to be changed at a later date to be configured efficently. 
+  // Spawn rates of the enemies. Will need to be changed at a later date to be configured efficently.
   final float crushingBlockChance = 0.33, shooterChance = 0.33, soldierChance = 0.33;
   
   // Constructor
   Enemy() {
+    this("soldier");
+  }
+  
+  Enemy(String type) {
     amt = 0;
-    type = "soldier";
+    this.type = type;
     enemyDelay = (int)random(2,7);
   }
   

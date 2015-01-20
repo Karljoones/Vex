@@ -101,7 +101,7 @@ class Collision {
         }
       }
     } else {
-      velocity.y += gravity;
+      // velocity.y += gravity;
       return false;
     }
     
@@ -127,6 +127,6 @@ class Collision {
   } // End checkPlayerBoundaries()
   
   void enemyCollision() {
-    // Enemy collision with the player needs to go here.
+    // Enemy collision with the player needs to go here
   }
 }

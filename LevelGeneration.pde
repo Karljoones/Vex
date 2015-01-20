@@ -1,5 +1,3 @@
-// Random level generator
-
 class levelGen{
   
   void work() {
