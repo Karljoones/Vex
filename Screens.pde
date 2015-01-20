@@ -10,7 +10,7 @@ class Screens {
       fill(255,0,0);
       textMode(CENTER);
       textFont(mainMenuFont, 70);
-      text("VEX", width / 2, 100);
+      text("VEX", halfWidth, 100);
     popStyle();
 
     cursor(CROSS);
@@ -110,7 +110,7 @@ class Screens {
       rectMode(CENTER);
       noStroke();
       fill(255, 100);
-      rect(width / 2, height / 2, windowWidthL, windowHeightL, 50);
+      rect(halfWidth, halfHeight, windowWidthL, windowHeightL, 50);
       
       // Upgrade window
       pushStyle();
@@ -119,30 +119,30 @@ class Screens {
         textFont(upgradeWindowFont, 22);
         textMode(CENTER);
     
-        rect(width / 2 + windowWidthS + 40, height / 2, windowWidthS, windowHeightS, 50);
-        rect(width / 2, height / 2, windowWidthS, windowHeightS, 50);
-        rect(width / 2 - windowWidthS - 40, height / 2, windowWidthS, windowHeightS, 50);
+        rect(halfWidth + windowWidthS + 40, halfHeight, windowWidthS, windowHeightS, 50);
+        rect(halfWidth, halfHeight, windowWidthS, windowHeightS, 50);
+        rect(halfWidth - windowWidthS - 40, halfHeight, windowWidthS, windowHeightS, 50);
        popStyle();
        
         if(speed1B) {
-          text("Speed Boost\n\n Current Level: 1 / 3\nMultiplier: " + speed1, ((width / 2 + windowWidthS) / 2) - (windowWidthS / 2), height / 2);
+          text("Speed Boost\n\n Current Level: 1 / 3\nCost: " + speed2Cost + "\nMultiplier: " + speed1, ((halfWidth + windowWidthS) / 2) - (windowWidthS / 2), halfHeight - 50);
         } else if(speed2B) {
-          text("Speed Boost\n\n Current Level: 2 / 3\nMultiplier: " + speed2, ((width / 2 + windowWidthS) / 2) - (windowWidthS / 2), height / 2);
+          text("Speed Boost\n\n Current Level: 2 / 3\nCost: " + speed3Cost + "\nMultiplier: " + speed2, ((halfWidth + windowWidthS) / 2) - (windowWidthS / 2), halfHeight - 50);
         } else if(speed3B) {
-          text("Speed Boost\n\n Current Level: MAX!!\nMultiplier: " + speed3, ((width / 2 + windowWidthS) / 2) - (windowWidthS / 2), height / 2);
+          text("Speed Boost\n\n Current Level: MAX!!\nMultiplier: " + speed3, ((halfWidth + windowWidthS) / 2) - (windowWidthS / 2), halfHeight - 50);
         } else {
-          text("Speed Boost\n\n Current Level: 0 / 3", ((width / 2 + windowWidthS) / 2) - (windowWidthS / 2), height / 2);
+          text("Speed Boost\n\n Current Level: 0 / 3\nCost: " + speed1Cost, ((halfWidth + windowWidthS) / 2) - (windowWidthS / 2), halfHeight - 50);
         } // End speed upgrades
         
         if(jump1B) {
-          text("Jump Boost\n\n Current Level: 1 / 2\nMultiplier: " + jump1, width / 2, height / 2);
+          text("Jump Boost\n\n Current Level: 1 / 2\nCost: " + jump2Cost + "\nMultiplier: " + jump1, halfWidth, halfHeight - 50);
         } else if(jump2B) {
-          text("Jump Boost\n\n Current Level: MAX!!\nMultiplier: " + jump2, width / 2, height / 2);
+          text("Jump Boost\n\n Current Level: MAX!!\nMultiplier: " + jump2, halfWidth, halfHeight - 50);
         } else {
-          text("Jump Boost\n\n Current Level: 0 / 2", width / 2, height / 2);
+          text("Jump Boost\n\n Current Level: 0 / 2\nCost: " + jump1Cost, halfWidth, halfHeight - 50);
         } // End jump upgrades
         
-        text("Weapons upgrades\nTo be\n\n added later", (width / 2 + windowWidthS) + 20, height / 2);
+        text("Weapons upgrades\n\nTo be\n added later", (halfWidth + windowWidthS) + 40, halfHeight - 50);
     } // End power up screen.
     
     if (debugging) {
@@ -172,7 +172,7 @@ class Screens {
       fill(255,0,0);
       textMode(CENTER);
       textFont(mainMenuFont, 70);
-      text("VEX", width / 2, 100);
+      text("VEX", halfWidth, 100);
     popStyle();
     
     // Waveform
@@ -273,7 +273,7 @@ class Screens {
     fill(255);
     text("HOW TO PLAY", width/2, height/2-200);
     textFont(instructions, 55);
-    text(" Use the RIGHT \n arrow to move \n UP to jump \n P to pause \n M to return to main menu\n KEEP MOVING RIGHT", width / 2, height / 2 - 100);
+    text(" Use the RIGHT \n arrow to move \n UP to jump \n P to pause \n M to return to main menu\n KEEP MOVING RIGHT", halfWidth, halfHeight - 100);
     
     if (keyPressed) {
       if (key == 'm' || key == 'M') {

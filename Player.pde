@@ -20,6 +20,14 @@ class Player {
     input();
     move();
     draw();
+    score();
+  }
+  
+  // This method keeps track of the players score and adds to it when it is necessary to do so
+  void score() {
+    if(holdingRight) {
+      playerScore++;
+    }
   }
   
   void displayStats() {
@@ -31,7 +39,7 @@ class Player {
   } // End displayStats()
 
   void input() {   
-    float curSpeed = (pCollision.isOnGround() ? run_speed : air_run);
+    curSpeed = (pCollision.isOnGround() ? run_speed : air_run);
     float curFriction = (pCollision.isOnGround() ? friction : air_resist);
     float curJump =  jump_power;
     
