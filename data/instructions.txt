@@ -1,0 +1,5 @@
+Instructions
+RIGHT and UP keys to move the character
+C to choose and unlock your characters
+P to upgrade the character
+M to return to the main menu

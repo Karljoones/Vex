@@ -1,3 +1,5 @@
+// This class is used to randomly generate levels so that the game never ends, needs to be tweeked
+
 class levelGen{
   
   void work() {
@@ -17,7 +19,7 @@ class levelGen{
     line(line8_start.x, line8_start.y, line8_end.x, line8_end.y);
   }
   
-  void check() {
+  void check() {     // This method ensures that the level does not go too high and also creates the random levels, needs to be seperated into two methods / renamed
     
     // Horizontal
     if(line1_end.x < 0) {

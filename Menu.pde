@@ -72,8 +72,7 @@ class Menu {
   // Options menu
   void options() {
    if(mousePressed) {
-     
-     // Debugging aka framerate display. To be implemented: playerSpeed, difficulty(to do with player speed).
+     // Debugging aka framerate display
      if(mouseX > ((width/2) - (buttonWidth/2)) && mouseX < ((width/2) + (buttonWidth/2))) {
        if(mouseY > (((height/2) - 150) - (buttonHeight/2)) && mouseY < ((height/2) - 150) + (buttonHeight/2)) {
          delay(200);
@@ -127,6 +126,32 @@ class Menu {
        }
      } // End exit
    } // End mousePressed
+   
+   // Options information
+   textFont(optionsMenuFont, 30);
+   textAlign(CENTER);
+   fill(255);
+   
+   // Debugging mode information
+   if(mouseX > ((width/2) - (buttonWidth/2)) && mouseX < ((width/2) + (buttonWidth/2))) {
+     if(mouseY > (((height/2) - 150) - (buttonHeight/2)) && mouseY < ((height/2) - 150) + (buttonHeight/2)) {
+       text("Enables FPS display and disables wall collision", halfWidth, halfHeight - 200);
+     }
+   }
+   
+   // Music toggle information
+   if(mouseX > ((width/2) - (buttonWidth/2)) && mouseX < ((width/2) + (buttonWidth/2))) {
+     if(mouseY > (((height/2) - 50) - (buttonHeight/2)) && mouseY < ((height/2) - 50) + (buttonHeight/2)) {
+       text("Enable / disable music", halfWidth, halfHeight - 200);
+     }
+   }
+   
+   // Sound effects toggle information
+   if(mouseX > ((width/2) - (buttonWidth/2)) && mouseX < ((width/2) + (buttonWidth/2))) {
+     if(mouseY > (((height/2) + 50) - (buttonHeight/2)) && mouseY < ((height/2) + 50) + (buttonHeight/2)) {
+       text("Enable / disable sound effects", halfWidth, halfHeight - 200);
+     }
+   }
  } // End options menu
  
  void play() {
@@ -146,6 +171,7 @@ class Menu {
               if(playerScore >= speed2Cost) {
                 speed1B = false;
                 speed2B = true;
+                playerScore -= speed2Cost;
               }
             }
             if(speed2B) {
@@ -153,6 +179,7 @@ class Menu {
                 speed1B = false;
                 speed2B = false;
                 speed3B = true;
+                playerScore -= speed3Cost;
               }
             }
            }
@@ -179,7 +206,7 @@ class Menu {
          } // End of middle button
          
          // Left button - weapons / health upgrade button
-         if(mouseX > halfWidth + windowWidthS + 40 && mouseX < halfWidth + windowWidthS + 40 + (windowWidthS / 2)) {
+         if(mouseX > halfWidth + (windowWidthS / 2) + 40 && mouseX < halfWidth + windowWidthS + 40 + (windowWidthS / 2)) {
            if(mouseY > (halfHeight - (windowHeightS / 2)) && mouseY < (halfHeight + (windowHeightS / 2))) {
              
            }
@@ -187,9 +214,10 @@ class Menu {
        } // End powerupscreen
        
        if(characterSelection) {
-         // Right button - Billy, avatar1
+         // Left button - Billy, avatar1
          if(mouseX > halfWidth - windowWidthS - 40 - (windowWidthS / 2) && mouseX < halfWidth - windowWidthS - 40 + (windowWidthS / 2)) {
            if(mouseY > (halfHeight - (windowHeightS / 2)) && mouseY < (halfHeight + (windowHeightS / 2))) {
+              println("Left button clicked");
               avatar1 = true;
               avatar2 = false;
               avatar3 = false;
@@ -199,6 +227,7 @@ class Menu {
          // Middle button - Sammie, avatar2
          if(mouseX > (halfWidth - (windowWidthS / 2)) && mouseX < (halfWidth + (windowWidthS / 2))) {
            if(mouseY > (halfHeight - (windowHeightS / 2)) && mouseY < (halfHeight + (windowHeightS / 2))) {
+             println("Middle button clicked");
              if(avatar2Unlocked){
                avatar1 = false;
                avatar2 = true;
@@ -216,9 +245,10 @@ class Menu {
            }
          } // End of middle button
          
-         // Left button - Terry, avatar3
-         if(mouseX > halfWidth + windowWidthS + 40 && mouseX < halfWidth + windowWidthS + 40 + (windowWidthS / 2)) {
+         // Right button - Terry, avatar3
+         if(mouseX > halfWidth + (windowWidthS / 2) + 40 && mouseX < halfWidth + windowWidthS + 40 + (windowWidthS / 2)) {
            if(mouseY > (halfHeight - (windowHeightS / 2)) && mouseY < (halfHeight + (windowHeightS / 2))) {
+             println("Right button clicked");
              if(avatar3Unlocked){
                avatar1 = false;
                avatar2 = false;

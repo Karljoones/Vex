@@ -5,23 +5,24 @@ class Load {
     playerStatsDisplay = loadFont("ARDESTINE-48.vlw");
     instructions = loadFont("AgencyFB-Reg-48.vlw");
     upgradeWindowFont = loadFont("CopperplateGothic-Bold-48.vlw");
+    onScreenInstructionsFont = loadFont("GloucesterMT-ExtraCondensed-48.vlw");
+    optionsMenuFont = loadFont("SourceSansPro-Regular-48.vlw");
   }
 
   void loadImages() {
-    // Loading in the images
+    // Loading in the images, used for later expansion of the game
   }
 
-  // Make sure that everything is ready for a new game to begin.
   void initialiseGame() {
     playerCoins = 0;
     playerScore = 0;
     velocity.x = 0;
     velocity.y = 0;
     jump1B = jump2B = speed1B = speed2B = speed3B = powerUpScreen = characterSelection = avatar2Unlocked = avatar3Unlocked = false;
+    j = 0;
   }
   
   void loadVectors() {
-    
     // Horizontal
     line1_start = new PVector(0, height - 100);
     line1_end = new PVector(width - 50, height - 100);
@@ -53,6 +54,8 @@ class Load {
     // Vertical
     line8_start = new PVector(line7_end.x, line7_end.y);
     line8_end = new PVector(line8_start.x, line8_start.y + random(verticalMin, verticalMax));
+    
+    onScreenInstructions = new PVector(halfWidth, 300);
   } // End loadVectors
   
   void loadMusic() {
@@ -65,7 +68,13 @@ class Load {
   }
   
   void loadTextFiles() {
-    // Code for loading the text files.. 
+    // String[] firstnames = loadStrings("firstnames.csv");           Not yet implemented as
+    // String[] secondnames = loadStrings("secondnames.csv");         enemies are not implemented
+    instructionsList = loadStrings("instructions.txt");
+
+    // The following two variables are used to generate random names for the enemies, this is not yet implemented as the enemies are not implemented.
+    // firstNames = split(firstnames[0], ',');
+    // secondNames = split(secondnames[0], ',');
   }
   
 } // End class

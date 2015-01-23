@@ -1,12 +1,11 @@
 class Enemy {
   final int enemyCount = 5;
   String type;
-  int amt, enemyDelay;
+  int amt, enemyDelay, soldierSpeed = 30, curEnemySpeed;
   
   // Spawn rates of the enemies. Will need to be changed at a later date to be configured efficently.
-  final float crushingBlockChance = 0.33, shooterChance = 0.33, soldierChance = 0.33;
+  final float crushingBlockChance = 0.12, shooterChance = 0.33, soldierChance = 0.66; // Soldier is the most common enemy, this will just try to attack the player, it has no weapons just tries to attack the player with brute force
   
-  // Constructor
   Enemy() {
     this("soldier");
   }
@@ -15,13 +14,15 @@ class Enemy {
     amt = 0;
     this.type = type;
     enemyDelay = (int)random(2,7);
+    enemyPos = new PVector(width - 100, 100);
   }
   
-  void nameGenerateEnemy() {
-    load.loadTextFiles(); // this loads in the two name files for the names of the enemies.
-    
-    
-  } // End nameGenerateEnemy()
+  void spawnEnemy() {
+    if(playerScore % 500 == 0) {
+      generateEnemy("soldier");
+      enemies.add(new Enemy("soldier"));
+    }
+  }
   
   void generateEnemy(String type) {
     if(type == "crushing block") {
@@ -31,15 +32,31 @@ class Enemy {
       // Fire at the player
     }
     if(type == "soldier") {
-      pCollision.enemyCollision();
+      pCollision.enemyCollision(); // Not yet implemented
+      
+      fill(255, 0, 0);
+      noStroke();
+      rect(enemyPos.x, enemyPos.y, playerSize, playerSize);
+      move("soldier");
     }
     if(type == "random") {
-      // Choose a random enemy to throw at the player
+      // Choose a random enemy to throw at the player. Not yet implemented.
     }
   }
   
-  void move() {
-    // Enermy movement here.
+  void move(String type) {
+    if(type == "soldier") {
+       enemyPos.sub(velocity);
+       curEnemySpeed = soldierSpeed;
+       
+       if(enemyPos.y < 0) {
+         curEnemySpeed += soldierSpeed;
+       } else {
+         curEnemySpeed -= soldierSpeed;
+       }
+       
+       enemyPos.y += curEnemySpeed;
+    }
   }
   
   void draw() {

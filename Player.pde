@@ -1,3 +1,5 @@
+// This class has everything to do with the player, including the drawing and the movement
+
 class Player {
   boolean isOnGround;
   
@@ -42,8 +44,11 @@ class Player {
   void input() {   
     float curSpeed = (pCollision.isOnGround() ? run_speed : air_run);
     float curFriction = (pCollision.isOnGround() ? friction : air_resist);
-    float curJump =  jump_power;
+    float curJump = jump_power;
     
+    if(avatar3) {
+      curSpeed *= terrySpeedBonus; // This is the speed boost that the player gets just for being Terry
+    }
     if(speed1B) {
       curSpeed *= speed1;
       println("Current speed is: " + curSpeed + " with a multiplier of: " + speed1);
@@ -55,17 +60,21 @@ class Player {
       println("Current speed is: " + curSpeed + " with a multiplier of: " + speed3);
     }
     
+    if(avatar2) { // Only occurs when the character is Sammie, the one with the jump boost
+      curJump *= sammieJumpBonus;
+    }
     if(jump1B) {
-      curJump = jump_power * jump1;
+      curJump *= jump1;
       println("Current jump height is: " + curJump + " with a multiplier of: " + jump1);
     } else if(jump2B) {
-      curJump = jump_power * jump2;
+      curJump *= jump2;
       println("Current jump height is: " + curJump + " with a multiplier of: " + jump2);
     }
     
     if(holdingRight) {
       velocity.x += curSpeed;
     }
+    
     if(!debugging){
       if(holdingUp) {
         velocity.y += -curJump;
@@ -82,7 +91,7 @@ class Player {
   } // End input()
 
   void move() {
-    if(!debugging) {
+    if(!debugging) { 
       if(pCollision.playerWalls() == false) {
         line1_start.sub(velocity);
         line1_end.sub(velocity);
@@ -102,7 +111,7 @@ class Player {
         line8_end.sub(velocity);
       }
     }
-    if(debugging) {
+    if(debugging) { // This needs to be used and can be set in game, it turns off the player collision with the walls, for demonstration purposes
       line1_start.sub(velocity);
       line1_end.sub(velocity);
       line2_start.sub(velocity);
@@ -123,17 +132,20 @@ class Player {
   }
   
   void draw() {
-    if(avatar1) {
+    // Billy
+    if(avatar1) { 
       stroke(0,255,0);
       noFill();
       rect(playerPos.x, playerPos.y, playerSize, playerSize);
     } 
+    // Sammie
     if(avatar2){
       stroke(255,0,0);
       fill(255, 0, 0, 150);
       rect(playerPos.x, playerPos.y, playerSize + 15, playerSize + 15);
       triangle(playerPos.x, playerPos.y, playerPos.x - 50, playerPos.y - 40, playerPos.x + 50, playerPos.y - 40);
-    } 
+    }
+    // Terry
     if(avatar3){
       stroke(255);
       fill(255);

@@ -1,6 +1,6 @@
+// This class draws all of the backgrounds of the game and the menus for the game
+
 class Screens {
-  final int powerUpWindowsAmt = 3;
-  
   // Main menu screen
   void mainMenu() {
     clear();
@@ -10,7 +10,7 @@ class Screens {
       fill(255,0,0);
       textMode(CENTER);
       textFont(mainMenuFont, 70);
-      text("VEX", halfWidth, 100);
+      text("VEX", halfWidth, 100); // Main menu VEX sign
     popStyle();
 
     cursor(CROSS);
@@ -35,7 +35,6 @@ class Screens {
     fill(0);
     noStroke();
     rectMode(CENTER);
-    rect((width/2), (height/2), (buttonWidth + 10), 420, 25, 25, 25, 25);
 
     // Start button
     fill(0);
@@ -105,14 +104,42 @@ class Screens {
       renderWave();
     }
     
-    // Shows in game when the player uses the P key, shows the available power ups to the player, these upgrades do not stack.
+    // Scrolling instructions on the screen these go to the left as the player goes to the right
+    pushStyle();
+      textFont(onScreenInstructionsFont, 48);
+      textAlign(CENTER);
+      fill(255, 100);
+      if(j == 0) {
+        text("Press the RIGHT key to move and the UP key to jump", onScreenInstructions.x, onScreenInstructions.y); 
+        onScreenInstructions.sub(velocity);
+        if(onScreenInstructions.x < 0 - halfWidth) { j++; onScreenInstructions.x = width; }
+        println(j);
+      } else if (j == 1) {
+        text("Press the c key to select your player", onScreenInstructions.x, onScreenInstructions.y);
+        onScreenInstructions.sub(velocity);
+        if(onScreenInstructions.x < 0- halfWidth) { j++; onScreenInstructions.x = width; }
+      } else if (j == 2) {
+        text("Press the p key to buy character upgrades", onScreenInstructions.x, onScreenInstructions.y);
+        onScreenInstructions.sub(velocity);
+        if(onScreenInstructions.x < -width) { j++; onScreenInstructions.x = width; }
+      } else if (j == 3) {
+        text("Press the m key to exit to the main menu, this will erase all your progress", onScreenInstructions.x, onScreenInstructions.y);
+        onScreenInstructions.sub(velocity);
+        if(onScreenInstructions.x < 0 - halfWidth) { j++; onScreenInstructions.x = width; }
+      } else if (j == 4) {
+        text(" ", onScreenInstructions.x, onScreenInstructions.y); // This is the template to add more text that scrolls through the level
+        onScreenInstructions.sub(velocity);
+        if(onScreenInstructions.x < -width) { j++; onScreenInstructions.x = width; }
+      }
+    popStyle(); // End of on screen instructions for the player
+    
     if(powerUpScreen || characterSelection) {
       rectMode(CENTER);
       noStroke();
       fill(255, 100);
       rect(halfWidth, halfHeight, windowWidthL, windowHeightL, 50);
       
-      // Upgrade window
+      // Windows for the upgrade and character selection screen
       pushStyle();
         noStroke();
         fill(0, 220);
@@ -124,7 +151,7 @@ class Screens {
         rect(halfWidth - windowWidthS - 40, halfHeight, windowWidthS, windowHeightS, 50);
        popStyle();
        
-       if(powerUpScreen) {
+       if(powerUpScreen) { // The code for the upgrade screen, when the player presses P
           if(speed1B) {
             text("Speed Upgrade\n\n Current Level: 1 / 3\nCost: " + speed2Cost + "\nMultiplier: " + speed1, ((halfWidth + windowWidthS) / 2) - (windowWidthS / 2), halfHeight - 50);
           } else if(speed2B) {
@@ -146,8 +173,8 @@ class Screens {
           text("Weapons Upgrade\n\n Coming soon..", (halfWidth + windowWidthS) + 40, halfHeight - 50);
        } // End if(powerUpScreen)
        
-       if(characterSelection) {
-         // Bill ( avatar 1 )
+       if(characterSelection) { // Character selection screen, shown when the player presses C. Character abilities stack with the upgrades that the player buys
+         // Bill
          pushStyle();
            rectMode(CENTER);
            stroke(0,255,0);
@@ -160,7 +187,7 @@ class Screens {
            text("Bill", (halfWidth + windowWidthS) / 2 - (windowWidthS / 2), halfHeight);
          }
          
-         // Sammie ( avatar 2 )
+         // Sammie
          pushStyle();
             stroke(255,0,0);
             fill(255, 0, 0, 150);
@@ -177,7 +204,7 @@ class Screens {
            }
          } // End sammie
          
-         // Terry ( avatar 3 )
+         // Terry
          pushStyle();
           stroke(255);
           fill(255);
@@ -199,20 +226,25 @@ class Screens {
            }
          } // End terry
          
-       }
-    } // End power up screen.
+         // Messages that are added above the selected character, giving them some background and information on their specal abilities.
+         textAlign(CENTER);
+         fill(0, 0, 255);
+         stroke(0, 0, 255);
+         if(avatar1){
+           text(billy, halfWidth, halfHeight - (windowHeightS / 2) - 40);
+         }
+         if(avatar2){
+           text(sammie, halfWidth, halfHeight - (windowHeightS / 2) - 40);
+         }
+         if(avatar3){
+           text(terry, halfWidth, halfHeight - (windowHeightS / 2) - 40);
+         }
+       } // End character selection
+    } // End ingame screens
     
     if (debugging) {
       fill(255);
       text(frameRate + "FPS", (width - 80), 30);
-      
-      pushStyle();
-        stroke(255,255,0, 50);
-        line(playerPos.x, 0.0, playerPos.x, height);
-        line(0.0, playerPos.y, width, playerPos.y);
-        text("X: " + playerPos.x, (width/2)-100, 15);
-        text("Y: " + playerPos.y, (width/2)+100, 15);
-      popStyle();
     }
 
     noStroke();
@@ -255,7 +287,6 @@ class Screens {
     fill(0);
     noStroke();
     rectMode(CENTER);
-    rect((width/2), (height/2), (buttonWidth + 210), 420, 25, 25, 25, 25);
 
     // Framerate button
     fill(0);
@@ -328,15 +359,24 @@ class Screens {
     textAlign(CENTER);
     textFont(instructions, 70);
     fill(255);
-    text("HOW TO PLAY", width/2, height/2-200);
     textFont(instructions, 55);
-    text(" Use the RIGHT \n arrow to move \n UP to jump \n P to pause \n M to return to main menu\n KEEP MOVING RIGHT", halfWidth, halfHeight - 100);
+    text(instructionsList[0], halfWidth, 200);
+    text(instructionsList[1], halfWidth, 300);
+    text(instructionsList[2], halfWidth, 400);
+    text(instructionsList[3], halfWidth, 500);
+    text(instructionsList[4], halfWidth, 600);
     
-    if (keyPressed) {
-      if (key == 'm' || key == 'M') {
-        mainMenu = true;
-        instructionsScreen = false;
-      }
+    // Waveform or sine wave depending on the sound options
+    if(musicOPT) {
+      stroke(255, 50);
+      for (int i = 0; i < mainMenuMusic.bufferSize () - 1; i++ )
+      {
+        line(i, 50 + mainMenuMusic.left.get(i)*150, i + 2, 50 + mainMenuMusic.left.get(i+1)*150);
+        line(i, 150 + mainMenuMusic.right.get(i)*150, i + 2, 150 + mainMenuMusic.right.get(i+1)*150);
+      } 
+    } else {
+      calcWave();
+      renderWave();
     }
   } // End instructions screen
   
@@ -358,8 +398,7 @@ class Screens {
     for(int x = 0; x < yvalues.length ; x++ ) {
       ellipse(x*spacing, height/2+yvalues[x], 16,16);
     } 
-  }
-  // End sine wave
+  } // End renderWave() and sine wave controls
   
 } // End class
 
