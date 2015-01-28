@@ -1,4 +1,4 @@
-Instructions
+-=-=-= Instructions =-=-=-
 RIGHT and UP keys to move the character
 C to choose and unlock your characters
 P to upgrade the character

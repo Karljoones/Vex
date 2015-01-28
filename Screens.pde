@@ -1,32 +1,20 @@
-// This class draws all of the backgrounds of the game and the menus for the game
-
 class Screens {
   // Main menu screen
   void mainMenu() {
     clear();
     background(0);
-    
+
     pushStyle();
-      fill(255,0,0);
-      textMode(CENTER);
-      textFont(mainMenuFont, 70);
-      text("VEX", halfWidth, 100); // Main menu VEX sign
+    fill(255, 0, 0);
+    textMode(CENTER);
+    textFont(mainMenuFont, 70);
+    text("VEX", halfWidth, 100); // Main menu VEX sign
     popStyle();
 
     cursor(CROSS);
 
-    // Waveform or sine wave depending on the sound options
-    if(musicOPT) {
-      stroke(255, 50);
-      for (int i = 0; i < mainMenuMusic.bufferSize () - 1; i++ )
-      {
-        line(i, 50 + mainMenuMusic.left.get(i)*150, i + 2, 50 + mainMenuMusic.left.get(i+1)*150);
-        line(i, 150 + mainMenuMusic.right.get(i)*150, i + 2, 150 + mainMenuMusic.right.get(i+1)*150);
-      } 
-    } else {
-      calcWave();
-      renderWave();
-    }
+    calcWave();
+    renderWave();
 
     stroke(255);
     fill(206, 245, 247);
@@ -91,157 +79,163 @@ class Screens {
   void game() {
     clear();
     background(0);
-    
-    if(musicOPT) {
-      stroke(255, 40);
-      for (int i = 0; i < themeSong.bufferSize () - 1; i++ )
-      {
-        line(i, 50 + themeSong.left.get(i)*150, i + 2, 50 + themeSong.left.get(i+1)*150);
-        line(i, 150 + themeSong.right.get(i)*150, i + 2, 150 + themeSong.right.get(i+1)*150);
-      }
-    } else {
-      calcWave();
-      renderWave();
-    }
-    
+
+    calcWave();
+    renderWave();
+
     // Scrolling instructions on the screen these go to the left as the player goes to the right
     pushStyle();
-      textFont(onScreenInstructionsFont, 48);
-      textAlign(CENTER);
-      fill(255, 100);
-      if(j == 0) {
-        text("Press the RIGHT key to move and the UP key to jump", onScreenInstructions.x, onScreenInstructions.y); 
-        onScreenInstructions.sub(velocity);
-        if(onScreenInstructions.x < 0 - halfWidth) { j++; onScreenInstructions.x = width; }
-        println(j);
-      } else if (j == 1) {
-        text("Press the c key to select your player", onScreenInstructions.x, onScreenInstructions.y);
-        onScreenInstructions.sub(velocity);
-        if(onScreenInstructions.x < 0- halfWidth) { j++; onScreenInstructions.x = width; }
-      } else if (j == 2) {
-        text("Press the p key to buy character upgrades", onScreenInstructions.x, onScreenInstructions.y);
-        onScreenInstructions.sub(velocity);
-        if(onScreenInstructions.x < -width) { j++; onScreenInstructions.x = width; }
-      } else if (j == 3) {
-        text("Press the m key to exit to the main menu, this will erase all your progress", onScreenInstructions.x, onScreenInstructions.y);
-        onScreenInstructions.sub(velocity);
-        if(onScreenInstructions.x < 0 - halfWidth) { j++; onScreenInstructions.x = width; }
-      } else if (j == 4) {
-        text(" ", onScreenInstructions.x, onScreenInstructions.y); // This is the template to add more text that scrolls through the level
-        onScreenInstructions.sub(velocity);
-        if(onScreenInstructions.x < -width) { j++; onScreenInstructions.x = width; }
+    textFont(onScreenInstructionsFont, 48);
+    textAlign(CENTER);
+    fill(255, 100);
+    if (j == 0) {
+      text("Press the RIGHT key to move and the UP key to jump", onScreenInstructions.x, onScreenInstructions.y); 
+      onScreenInstructions.sub(velocity);
+      if (onScreenInstructions.x < 0 - halfWidth) { 
+        j++; 
+        onScreenInstructions.x = width;
       }
+      println(j);
+    } else if (j == 1) {
+      text("Press the c key to select your player", onScreenInstructions.x, onScreenInstructions.y);
+      onScreenInstructions.sub(velocity);
+      if (onScreenInstructions.x < 0- halfWidth) { 
+        j++; 
+        onScreenInstructions.x = width;
+      }
+    } else if (j == 2) {
+      text("Press the p key to buy character upgrades", onScreenInstructions.x, onScreenInstructions.y);
+      onScreenInstructions.sub(velocity);
+      if (onScreenInstructions.x < -width) { 
+        j++; 
+        onScreenInstructions.x = width;
+      }
+    } else if (j == 3) {
+      text("Press the m key to exit to the main menu, this will erase all your progress", onScreenInstructions.x, onScreenInstructions.y);
+      onScreenInstructions.sub(velocity);
+      if (onScreenInstructions.x < 0 - halfWidth) { 
+        j++; 
+        onScreenInstructions.x = width;
+      }
+    } else if (j == 4) {
+      text(" ", onScreenInstructions.x, onScreenInstructions.y); // This is the template to add more text that scrolls through the level
+      onScreenInstructions.sub(velocity);
+      if (onScreenInstructions.x < -width) { 
+        j++; 
+        onScreenInstructions.x = width;
+      }
+    }
     popStyle(); // End of on screen instructions for the player
-    
-    if(powerUpScreen || characterSelection) {
+
+    if (powerUpScreen || characterSelection) {
       rectMode(CENTER);
       noStroke();
       fill(255, 100);
       rect(halfWidth, halfHeight, windowWidthL, windowHeightL, 50);
-      
+
       // Windows for the upgrade and character selection screen
       pushStyle();
+      noStroke();
+      fill(0, 220);
+      textFont(upgradeWindowFont, 22);
+      textMode(CENTER);
+
+      rect(halfWidth + windowWidthS + 40, halfHeight, windowWidthS, windowHeightS, 50);
+      rect(halfWidth, halfHeight, windowWidthS, windowHeightS, 50);
+      rect(halfWidth - windowWidthS - 40, halfHeight, windowWidthS, windowHeightS, 50);
+      popStyle();
+
+      if (powerUpScreen) { // The code for the upgrade screen, when the player presses P
+        if (speed1B) {
+          text("Speed Upgrade\n\n Current Level: 1 / 3\nCost: " + speed2Cost + "\nMultiplier: " + speed1, ((halfWidth + windowWidthS) / 2) - (windowWidthS / 2), halfHeight - 50);
+        } else if (speed2B) {
+          text("Speed Upgrade\n\n Current Level: 2 / 3\nCost: " + speed3Cost + "\nMultiplier: " + speed2, ((halfWidth + windowWidthS) / 2) - (windowWidthS / 2), halfHeight - 50);
+        } else if (speed3B) {
+          text("Speed Upgrade\n\n Current Level: MAX!!\nMultiplier: " + speed3, ((halfWidth + windowWidthS) / 2) - (windowWidthS / 2), halfHeight - 50);
+        } else {
+          text("Speed Upgrade\n\n Current Level: 0 / 3\nCost: " + speed1Cost, ((halfWidth + windowWidthS) / 2) - (windowWidthS / 2), halfHeight - 50);
+        } // End speed upgrades
+
+        if (jump1B) {
+          text("Jump Upgrade\n\n Current Level: 1 / 2\nCost: " + jump2Cost + "\nMultiplier: " + jump1, halfWidth, halfHeight - 50);
+        } else if (jump2B) {
+          text("Jump Upgrade\n\n Current Level: MAX!!\nMultiplier: " + jump2, halfWidth, halfHeight - 50);
+        } else {
+          text("Jump Upgrade\n\n Current Level: 0 / 2\nCost: " + jump1Cost, halfWidth, halfHeight - 50);
+        } // End jump upgrades
+
+        text("Weapons Upgrade\n\n Coming soon..", (halfWidth + windowWidthS) + 40, halfHeight - 50);
+      } // End if(powerUpScreen)
+
+      if (characterSelection) { // Character selection screen, shown when the player presses C. Character abilities stack with the upgrades that the player buys
+        // Bill
+        pushStyle();
+        rectMode(CENTER);
+        stroke(0, 255, 0);
+        noFill();
+        rect((halfWidth + windowWidthS) / 2 - (windowWidthS / 2), halfHeight - 100, playerSize, playerSize);
+        popStyle();
+        if (avatar1) {
+          text("Bill\n\nSelected!", (halfWidth + windowWidthS) / 2 - (windowWidthS / 2), halfHeight);
+        } else {
+          text("Bill", (halfWidth + windowWidthS) / 2 - (windowWidthS / 2), halfHeight);
+        }
+
+        // Sammie
+        pushStyle();
+        stroke(255, 0, 0);
+        fill(255, 0, 0, 150);
+        rect(halfWidth, halfHeight - 100, playerSize + 15, playerSize + 15);
+        triangle(halfWidth, halfHeight - 100, halfWidth - 50, halfHeight - 140, halfWidth + 50, halfHeight - 140);           
+        popStyle();
+        if (avatar2) {
+          text("Sammie\n\nSelected!", halfWidth, halfHeight);
+        } else {
+          if (avatar2Unlocked) {
+            text("Sammie", halfWidth, halfHeight);
+          } else {
+            text("Sammie\n\nUnlock cost: " + avatar2Cost, halfWidth, halfHeight);
+          }
+        } // End sammie
+
+        // Terry
+        pushStyle();
+        stroke(255);
+        fill(255);
+        rect(halfWidth + windowWidthS + 40, halfHeight - 100, playerSize, playerSize);
+        ellipse(halfWidth + windowWidthS + (playerSize / 2) - 5, halfHeight - 100, playerSize, playerSize);
+        ellipse(halfWidth + windowWidthS + (playerSize / 2) + 15, (halfHeight - 100) - (playerSize / 2), playerSize, playerSize);
+        fill(0);
         noStroke();
-        fill(0, 220);
-        textFont(upgradeWindowFont, 22);
-        textMode(CENTER);
-    
-        rect(halfWidth + windowWidthS + 40, halfHeight, windowWidthS, windowHeightS, 50);
-        rect(halfWidth, halfHeight, windowWidthS, windowHeightS, 50);
-        rect(halfWidth - windowWidthS - 40, halfHeight, windowWidthS, windowHeightS, 50);
-       popStyle();
-       
-       if(powerUpScreen) { // The code for the upgrade screen, when the player presses P
-          if(speed1B) {
-            text("Speed Upgrade\n\n Current Level: 1 / 3\nCost: " + speed2Cost + "\nMultiplier: " + speed1, ((halfWidth + windowWidthS) / 2) - (windowWidthS / 2), halfHeight - 50);
-          } else if(speed2B) {
-            text("Speed Upgrade\n\n Current Level: 2 / 3\nCost: " + speed3Cost + "\nMultiplier: " + speed2, ((halfWidth + windowWidthS) / 2) - (windowWidthS / 2), halfHeight - 50);
-          } else if(speed3B) {
-            text("Speed Upgrade\n\n Current Level: MAX!!\nMultiplier: " + speed3, ((halfWidth + windowWidthS) / 2) - (windowWidthS / 2), halfHeight - 50);
+        ellipse(halfWidth + windowWidthS + 50, halfHeight - 105, 12, 12);
+        ellipse(halfWidth + windowWidthS + 30, halfHeight - 105, 12, 12);
+        popStyle();
+        if (avatar3) {
+          text("Terry\n\nSelected!", (halfWidth + windowWidthS) + 40, halfHeight);
+        } else {
+          if (avatar3Unlocked) {
+            text("Terry", (halfWidth + windowWidthS) + 40, halfHeight);
           } else {
-            text("Speed Upgrade\n\n Current Level: 0 / 3\nCost: " + speed1Cost, ((halfWidth + windowWidthS) / 2) - (windowWidthS / 2), halfHeight - 50);
-          } // End speed upgrades
-          
-          if(jump1B) {
-            text("Jump Upgrade\n\n Current Level: 1 / 2\nCost: " + jump2Cost + "\nMultiplier: " + jump1, halfWidth, halfHeight - 50);
-          } else if(jump2B) {
-            text("Jump Upgrade\n\n Current Level: MAX!!\nMultiplier: " + jump2, halfWidth, halfHeight - 50);
-          } else {
-            text("Jump Upgrade\n\n Current Level: 0 / 2\nCost: " + jump1Cost, halfWidth, halfHeight - 50);
-          } // End jump upgrades
-          
-          text("Weapons Upgrade\n\n Coming soon..", (halfWidth + windowWidthS) + 40, halfHeight - 50);
-       } // End if(powerUpScreen)
-       
-       if(characterSelection) { // Character selection screen, shown when the player presses C. Character abilities stack with the upgrades that the player buys
-         // Bill
-         pushStyle();
-           rectMode(CENTER);
-           stroke(0,255,0);
-           noFill();
-           rect((halfWidth + windowWidthS) / 2 - (windowWidthS / 2), halfHeight - 100, playerSize, playerSize);
-         popStyle();
-         if(avatar1) {
-           text("Bill\n\nSelected!", (halfWidth + windowWidthS) / 2 - (windowWidthS / 2), halfHeight);
-         } else {
-           text("Bill", (halfWidth + windowWidthS) / 2 - (windowWidthS / 2), halfHeight);
-         }
-         
-         // Sammie
-         pushStyle();
-            stroke(255,0,0);
-            fill(255, 0, 0, 150);
-            rect(halfWidth, halfHeight - 100, playerSize + 15, playerSize + 15);
-            triangle(halfWidth, halfHeight - 100, halfWidth - 50, halfHeight - 140, halfWidth + 50, halfHeight - 140);           
-         popStyle();
-         if(avatar2){
-           text("Sammie\n\nSelected!", halfWidth, halfHeight);
-         } else {
-           if(avatar2Unlocked) {
-             text("Sammie", halfWidth, halfHeight);
-           } else {
-             text("Sammie\n\nUnlock cost: " + avatar2Cost, halfWidth, halfHeight);
-           }
-         } // End sammie
-         
-         // Terry
-         pushStyle();
-          stroke(255);
-          fill(255);
-          rect(halfWidth + windowWidthS + 40, halfHeight - 100, playerSize, playerSize);
-          ellipse(halfWidth + windowWidthS + (playerSize / 2) - 5, halfHeight - 100, playerSize, playerSize);
-          ellipse(halfWidth + windowWidthS + (playerSize / 2) + 15, (halfHeight - 100) - (playerSize / 2), playerSize, playerSize);
-          fill(0);
-          noStroke();
-          ellipse(halfWidth + windowWidthS + 50, halfHeight - 105, 12, 12);
-          ellipse(halfWidth + windowWidthS + 30, halfHeight - 105, 12, 12);
-         popStyle();
-         if(avatar3){
-           text("Terry\n\nSelected!", (halfWidth + windowWidthS) + 40, halfHeight);
-         } else {
-           if(avatar3Unlocked){
-             text("Terry", (halfWidth + windowWidthS) + 40, halfHeight);
-           } else {
-             text("Terry\n\nUnlock cost: " + avatar3Cost, (halfWidth + windowWidthS) + 40, halfHeight);
-           }
-         } // End terry
-         
-         // Messages that are added above the selected character, giving them some background and information on their specal abilities.
-         textAlign(CENTER);
-         fill(0, 0, 255);
-         stroke(0, 0, 255);
-         if(avatar1){
-           text(billy, halfWidth, halfHeight - (windowHeightS / 2) - 40);
-         }
-         if(avatar2){
-           text(sammie, halfWidth, halfHeight - (windowHeightS / 2) - 40);
-         }
-         if(avatar3){
-           text(terry, halfWidth, halfHeight - (windowHeightS / 2) - 40);
-         }
-       } // End character selection
+            text("Terry\n\nUnlock cost: " + avatar3Cost, (halfWidth + windowWidthS) + 40, halfHeight);
+          }
+        } // End terry
+
+        // Messages that are added above the selected character, giving them some background and information on their specal abilities.
+        textAlign(CENTER);
+        fill(0, 0, 255);
+        stroke(0, 0, 255);
+        if (avatar1) {
+          text(billy, halfWidth, halfHeight - (windowHeightS / 2) - 40);
+        }
+        if (avatar2) {
+          text(sammie, halfWidth, halfHeight - (windowHeightS / 2) - 40);
+        }
+        if (avatar3) {
+          text(terry, halfWidth, halfHeight - (windowHeightS / 2) - 40);
+        }
+      } // End character selection
     } // End ingame screens
-    
+
     if (debugging) {
       fill(255);
       text(frameRate + "FPS", (width - 80), 30);
@@ -256,29 +250,18 @@ class Screens {
   void options() {
     clear();
     background(0);
-    
-    pushStyle();
-      fill(255,0,0);
-      textMode(CENTER);
-      textFont(mainMenuFont, 70);
-      text("VEX", halfWidth, 100);
-    popStyle();
-    
-    // Waveform
-    if(musicOPT) {
-      stroke(255, 30);
-      for (int i = 0; i < mainMenuMusic.bufferSize () - 1; i++ )
-      {
-        line(i, 50 + mainMenuMusic.left.get(i)*150, i, 50 + mainMenuMusic.left.get(i+1)*150);
-        line(i, 150 + mainMenuMusic.right.get(i)*150, i, 150 + mainMenuMusic.right.get(i+1)*150);
-      }
-    } else {
-      calcWave();
-      renderWave();
-    }
-
     cursor(CROSS);
-    
+
+    pushStyle();
+    fill(255, 0, 0);
+    textMode(CENTER);
+    textFont(mainMenuFont, 70);
+    text("VEX", halfWidth, 100);
+    popStyle();
+
+    calcWave();
+    renderWave();
+
     // Options buttons
     stroke(255);
     fill(206, 245, 247);
@@ -353,9 +336,10 @@ class Screens {
 
   // Instructions Screen
   void instructionsScreen() {
+    clear();
     background(0);
-    
-    // Instructions need to be changed when the starter code is implemented into the code.
+
+    // Reads in instructions from instructions.txt
     textAlign(CENTER);
     textFont(instructions, 70);
     fill(255);
@@ -365,28 +349,18 @@ class Screens {
     text(instructionsList[2], halfWidth, 400);
     text(instructionsList[3], halfWidth, 500);
     text(instructionsList[4], halfWidth, 600);
-    
-    // Waveform or sine wave depending on the sound options
-    if(musicOPT) {
-      stroke(255, 50);
-      for (int i = 0; i < mainMenuMusic.bufferSize () - 1; i++ )
-      {
-        line(i, 50 + mainMenuMusic.left.get(i)*150, i + 2, 50 + mainMenuMusic.left.get(i+1)*150);
-        line(i, 150 + mainMenuMusic.right.get(i)*150, i + 2, 150 + mainMenuMusic.right.get(i+1)*150);
-      } 
-    } else {
-      calcWave();
-      renderWave();
-    }
+
+    calcWave();
+    renderWave();
   } // End instructions screen
-  
+
   // Sine wave control.
   void calcWave() {
     theta += 0.02;
-    
+
     float x = theta;
-    
-    for(int i = 0; i < yvalues.length; i++ ) {
+
+    for (int i = 0; i < yvalues.length; i++ ) {
       yvalues[i] = sin(x) * amplitude;
       x+=dx;
     }
@@ -394,11 +368,10 @@ class Screens {
   void renderWave() {
     noStroke();
     fill(255, 30);
-    
-    for(int x = 0; x < yvalues.length ; x++ ) {
-      ellipse(x*spacing, height/2+yvalues[x], 16,16);
-    } 
+
+    for (int x = 0; x < yvalues.length; x++ ) {
+      ellipse(x*spacing, height/2+yvalues[x], 16, 16);
+    }
   } // End renderWave() and sine wave controls
-  
 } // End class
 
