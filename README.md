@@ -1,7 +1,7 @@
 Vex
 ===
 
-<p>The theme of this game is <a href="http://en.wikipedia.org/wiki/Tron">Tron</a>.
+<p>This game is inspired by <a href="http://en.wikipedia.org/wiki/Tron">Tron</a>.
 
 <h4>Design Targets</h4>
   <ul>
